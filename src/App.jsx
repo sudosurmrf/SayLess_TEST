@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import Homepage from './components/homepage'
+import Intro from './Components/Intro.jsx'
 
 function App() {
 
   return (
     <>
-      <Homepage/>
+      <Intro />
     </>
   )
 }
