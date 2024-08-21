@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Homepage = () => {
+const Intro = () => {
     return (
       <>
         <h1>SayLess</h1>
@@ -19,4 +19,4 @@ const Homepage = () => {
 
 )};
 
-export default Homepage;
+export default Intro;
