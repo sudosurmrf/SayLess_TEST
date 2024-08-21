@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getRandomQuote, famousQuotes } from './Quotes.jsx';
 
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
@@ -6,6 +7,11 @@ const Game = () => {
   const [showPlayerOneTurn, setPlayerOneTurn] = useState(true);
   const [playerOneInput, setPlayerOneInput] = useState("");
   const [playerTwoInput, setPlayerTwoInput] = useState("");
+
+  useEffect(()=>{
+    setAllQuotes(famousQuotes)
+    setQuote(getRandomQuote(allQuotes));
+  },[allQuotes])
 
   const compareQuoteInput = () => {
     if (quote === playerTwoInput) {
@@ -20,6 +26,7 @@ const Game = () => {
     { showPlayerOneTurn ?
       <>
       <h2> {quote} </h2>
+      <button onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Change Quote</button> <br />
       <form>
         <input value={playerOneInput} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
         <button onClick={() => {setPlayerOneTurn(false)}} type="button">Submit Your Shortening</button>
