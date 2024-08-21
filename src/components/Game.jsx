@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
@@ -17,20 +17,20 @@ const Game = () => {
 
   return (
     <>
-    { showPlayerOneTurn?
+    { showPlayerOneTurn ?
       <>
       <h2> {quote} </h2>
       <form>
-        <input value={playerOneInput} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required />
-        <button onClick={setPlayerOneTurn(false)} type="button"></button>
+        <input value={playerOneInput} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
+        <button onClick={() => {setPlayerOneTurn(false)}} type="button">Submit Your Shortening</button>
       </form>
       </>
       :
       <>
       <h2>{playerOneInput}</h2>
       <form>
-        <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required />
-        <button onClick={compareQuoteInput} type="button"></button>
+      <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
+      <button onClick={() => {compareQuoteInput()}} type="button"> Submit Your Guess</button>
       </form>
       </>
     }
