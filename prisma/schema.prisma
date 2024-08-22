@@ -18,23 +18,23 @@ model User {
   username      String   @db.VarChar(50)
   password      String   @db.VarChar(50)
   email         String   @db.VarChar(50)
-  wins          Int
-  losses        Int
-  avatarId      Int
-  score         Int
+  wins          Int?
+  losses        Int?
+  avatarId      Int?
+  score         Int?
   customQuotes  CustomQuote[]
 }
 
 model WinBadge {
   id            Int      @id @default(autoincrement())
   name          String   @db.VarChar(50)
-  gamesWon      Int
+  gamesWon      Int      @unique
 }
 
 model PlayBadge {
   id            Int      @id @default(autoincrement())
   name          String   @db.VarChar(50)
-  gamesPlayed   Int
+  gamesPlayed   Int      @unique
 }
 
 model CustomQuote {
