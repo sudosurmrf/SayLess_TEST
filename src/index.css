@@ -1,15 +1,17 @@
-h1 {
-    text-align: center;
-}
-
 body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin:0;
     padding:0;
     font-family:sans-serif;
     background:#000;
-    overflow:hidden;
+    /* overflow:hidden; */
 }
-  
+
+h1 {
+    text-align: center;
+} 
 .header{
     position: absolute;
     top:10%;
@@ -17,12 +19,10 @@ body{
     transform:prespective(1000px) translate(-50%,-50%);
     transition:0.5s;
 }
-  
 .header:hover{
     transform:prespective(1000px) translate(-50%,-50%);
     transform:skewY(0deg);
 }
-  
 .header h1 span{
     position:absolute;
     top:0;
@@ -31,38 +31,35 @@ body{
     margin:0;
     padding:0;
     text-transform:uppercase;
-    font-size: 7em;
-    color:green;
+    font-size: 6em;
+    color:#32CD32;
     transform-style:preserve-3d;
     transition:0.8s;
 }
 .header:hover h1 span:nth-child(1){
     clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
 }
-  
 .header:hover h1 span:nth-child(2){
     color:white;
     transform:translate(-50%,-50%) skewX(-60deg);
     left:-38px;
     clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
 }
-  
 .header:hover h1 span:nth-child(3){
     transform:translate(-50%,-50%) skewY(0deg);
     left:-76px;
     clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
 }
-  
 .header h1 span:nth-child(2), 
 .header h1 span:nth-child(3){
     transform:translate(-50%,-50%) skewX(0deg);
     left:0;
-    color:green;
+    color:#32CD32;
 }
 
 h2 {
     text-align: center;
-    margin-top: 22%;
+    margin-top: 200px;
     font-size: xx-large;
 }
 
@@ -70,5 +67,47 @@ h3 {
     text-align: center;
 }
 
-
-
+.footer {
+    position: absolute;
+    margin-top: 100px;
+    background-color: #32CD32; 
+    color: white; 
+    padding: 0rem;
+    width: 100%;
+}
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.col-md-4 {
+    text-align: center;
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0.75rem;
+}
+.row-mt-3 {
+    text-align: center;
+}
+.text-center {
+    text-align: center;
+}
+.nav {
+    list-style-type: none;
+    padding-left: 0;
+}
+.nav li {
+    margin-bottom: 0.5rem;
+}
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+.nav a:hover {
+    text-decoration: underline;
+    font-size: larger;
+}
