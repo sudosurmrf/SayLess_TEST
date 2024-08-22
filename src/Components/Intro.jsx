@@ -4,7 +4,7 @@ const Intro = () => {
     return (
       <>
       
-        <div class="header">
+        <div className="header">
          <h1>
           <span>SayLess</span>
   
@@ -15,6 +15,7 @@ const Intro = () => {
 
         <h2>The fun phrase game you will be itching to play!</h2>
         <h3>SayLess is a game where your opponent attempts to guess an entire phrase correctly by using only half of the characters used in the original phrase.</h3>
+        <h2>Rules</h2>
         <h4>
           <ol>
             <li>Player One will create or select a phrase to use.</li>
