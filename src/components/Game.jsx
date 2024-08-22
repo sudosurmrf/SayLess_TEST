@@ -14,10 +14,10 @@ const Game = () => {
   },[allQuotes])
 
   const compareQuoteInput = () => {
-    if (quote === playerTwoInput) {
+    if (quote === playerTwoInput.toLowerCase()) {
       console.log('YOU WON')
     } else {
-      console.log('Sorry, better luck next time.')
+      console.log('Try again.')
     }
   }
 
