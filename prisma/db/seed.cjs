@@ -1,5 +1,6 @@
 const prisma = require('./client.cjs');
 const { createUser } = require('./users.cjs');
+const { createWinBadge, createPlayBadge } = require('./badges.cjs');
 
 const syncAndSeed = async() => {
   try {
@@ -24,6 +25,24 @@ const syncAndSeed = async() => {
     await createUser("rachel_s", "rachelPass18", "rachel_s@example.com");
     await createUser("steve_22", "stevePass19", "steve_22@example.com");
     await createUser("tinaW", "tinaPass20", "tinaW@example.com");
+
+    await createWinBadge("1st win!", 1);
+    await createWinBadge("5th win!", 5);
+    await createWinBadge("10th win!", 10);
+    await createWinBadge("25th win!", 25);
+    await createWinBadge("50th win!", 50);
+    await createWinBadge("100th win!", 100);
+    await createWinBadge("500th win!", 500);
+    await createWinBadge("1,000th win!", 1000);
+    
+    await createPlayBadge("1st game!", 1);
+    await createPlayBadge("5th game!", 5);
+    await createPlayBadge("10th game!", 10);
+    await createPlayBadge("25th game!", 25);
+    await createPlayBadge("50th game!", 50);
+    await createPlayBadge("100th game!", 100);
+    await createPlayBadge("500th game!", 500);
+    await createPlayBadge("1,000th game!", 1000);
 
     await prisma.$disconnect();
 
