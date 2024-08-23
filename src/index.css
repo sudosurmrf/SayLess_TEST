@@ -5,18 +5,18 @@ body{
     margin:0;
     padding:0;
     font-family:sans-serif;
-    background:#000;
-    /* overflow:hidden; */
+    /* background:#000; */
 }
 
 h1 {
-    text-align: center;
+    /* text-align: center; */
 } 
 .header{
     position: relative;
     top: 65px;
     left:50%;
-    transform:prespective(1000px) translate(-50%,-50%);
+    right: 50%;
+    transform: prespective(1000px) translate(-50%,-50%);
     transition:0.5s;
 }
 .header:hover{
@@ -24,15 +24,15 @@ h1 {
     transform:skewY(0deg);
 }
 .header h1 span{
-    position:absolute;
+    position: absolute;
     top:0;
     left:0;
     transform:translate(-50%,-50%);
     margin:0;
     padding:0;
-    text-transform:uppercase;
+    text-transform: uppercase;
     font-size: 6em;
-    color:#32CD32;
+    color: lightskyblue;
     transform-style:preserve-3d;
     transition:0.8s;
 }
@@ -54,18 +54,35 @@ h1 {
 .header h1 span:nth-child(3){
     transform:translate(-50%,-50%) skewX(0deg);
     left:0;
-    color:#32CD32;
+    color: lightskyblue;
+}
+
+.motto {
+    margin-top: 200px;
+}
+
+.rules {
+    color: red;
+    border: solid red 5px;
+    border-radius: 10px;   
 }
 
 
 h2 {
     text-align: center;
-    margin-top: 200px;
     font-size: xx-large;
 }
 
+
 h3 {
     text-align: center;
+}
+
+h4 {
+    /* text-align: center; */
+    border: solid red 5px;
+    border-radius: 10px;
+    padding-left: 30%;
 }
 
 
@@ -77,7 +94,7 @@ h3 {
     padding: 0rem;
     width: 100%;
 }
-.container {
+.container-foot {
     max-width: 1140px;
     margin: 0 auto;
 }
