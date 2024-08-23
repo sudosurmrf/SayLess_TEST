@@ -45,8 +45,8 @@ const syncAndSeed = async() => {
     await createPlayBadge("500th game!", 500);
     await createPlayBadge("1,000th game!", 1000);
 
-    await createCustomQuote(`Actions! 2spe^&*ak louder than words`, 9);
-    await createCustomQuote(`i LIKE)(&*(^) candy6666`, 6);
+    await createCustomQuote(`actions speak louder than words`, 9);
+    await createCustomQuote(`i like candy`, 6);
 
     await prisma.$disconnect();
 
