@@ -49,8 +49,23 @@ const syncAndSeed = async() => {
     await createCustomQuote(`actions speak louder than words`, 9);
     await createCustomQuote(`i like candy`, 6);
 
-    await assignWinBadge(1,1);
-    await assignPlayBadge(10,4);
+    await assignWinBadge(1, 1);
+    await assignWinBadge(2, 2);
+    await assignWinBadge(3, 3);
+    await assignWinBadge(4, 4);
+    await assignWinBadge(5, 5);
+    await assignWinBadge(6, 6);
+    await assignWinBadge(7, 7);
+    await assignWinBadge(8, 8);
+
+    await assignPlayBadge(11, 1);
+    await assignPlayBadge(12, 2);
+    await assignPlayBadge(13, 3);
+    await assignPlayBadge(14, 4);
+    await assignPlayBadge(15, 5);
+    await assignPlayBadge(16, 6);
+    await assignPlayBadge(17, 7);
+    await assignPlayBadge(18, 8);
 
     await prisma.$disconnect();
 
