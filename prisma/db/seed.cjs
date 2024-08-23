@@ -2,6 +2,7 @@ const prisma = require('./client.cjs');
 const { createUser } = require('./users.cjs');
 const { createWinBadge, createPlayBadge } = require('./badges.cjs');
 const { createCustomQuote } = require('./quotes.cjs');
+const { assignWinBadge, assignPlayBadge } = require('./users-badges.cjs');
 
 const syncAndSeed = async() => {
   try {
@@ -47,6 +48,9 @@ const syncAndSeed = async() => {
 
     await createCustomQuote(`actions speak louder than words`, 9);
     await createCustomQuote(`i like candy`, 6);
+
+    await assignWinBadge(1,1);
+    await assignPlayBadge(10,4);
 
     await prisma.$disconnect();
 
