@@ -57,6 +57,7 @@ h1 {
     color:#32CD32;
 }
 
+
 h2 {
     text-align: center;
     margin-top: 200px;
@@ -66,6 +67,7 @@ h2 {
 h3 {
     text-align: center;
 }
+
 
 .footer {
     position: absolute;
@@ -96,18 +98,47 @@ h3 {
 .text-center {
     text-align: center;
 }
-.nav {
+.foot {
     list-style-type: none;
     padding-left: 0;
 }
-.nav li {
+.foot li {
     margin-bottom: 0.5rem;
 }
-.nav a {
+.foot a {
     color: white;
     text-decoration: none;
 }
-.nav a:hover {
+.foot a:hover {
+    text-decoration: underline;
+    font-size: larger;
+}
+
+
+.navbar {
+    background-color: #32CD32;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* .navbar-brand img {
+    width: 100px;
+    border-radius: 20px;
+} */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.nav-links a:hover {
     text-decoration: underline;
     font-size: larger;
 }
