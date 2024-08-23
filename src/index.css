@@ -13,8 +13,8 @@ h1 {
     text-align: center;
 } 
 .header{
-    position: absolute;
-    top:10%;
+    position: relative;
+    top: 65px;
     left:50%;
     transform:prespective(1000px) translate(-50%,-50%);
     transition:0.5s;
@@ -131,14 +131,15 @@ h3 {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 }
 .nav-links a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: x-large;
 }
 .nav-links a:hover {
     text-decoration: underline;
-    font-size: larger;
+    font-size: xx-large;
 }
