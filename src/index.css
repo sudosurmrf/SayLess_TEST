@@ -96,18 +96,18 @@ h3 {
 .text-center {
     text-align: center;
 }
-.nav {
+.foot {
     list-style-type: none;
     padding-left: 0;
 }
-.nav li {
+.foot li {
     margin-bottom: 0.5rem;
 }
-.nav a {
+.foot a {
     color: white;
     text-decoration: none;
 }
-.nav a:hover {
+.foot a:hover {
     text-decoration: underline;
     font-size: larger;
 }
