@@ -23,18 +23,22 @@ model User {
   avatarId      Int?
   score         Int?
   customQuotes  CustomQuote[]
+  winBadges     WinBadge[]
+  playBadges    PlayBadge[]
 }
 
 model WinBadge {
   id            Int      @id @default(autoincrement())
   name          String   @db.VarChar(50)
   gamesWon      Int      @unique
+  users         User[]
 }
 
 model PlayBadge {
   id            Int      @id @default(autoincrement())
   name          String   @db.VarChar(50)
   gamesPlayed   Int      @unique
+  users         User[]
 }
 
 model CustomQuote {
