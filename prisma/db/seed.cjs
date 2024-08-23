@@ -1,6 +1,7 @@
 const prisma = require('./client.cjs');
 const { createUser } = require('./users.cjs');
 const { createWinBadge, createPlayBadge } = require('./badges.cjs');
+const { createCustomQuote } = require('./quotes.cjs');
 
 const syncAndSeed = async() => {
   try {
@@ -43,6 +44,9 @@ const syncAndSeed = async() => {
     await createPlayBadge("100th game!", 100);
     await createPlayBadge("500th game!", 500);
     await createPlayBadge("1,000th game!", 1000);
+
+    await createCustomQuote(`Actions! 2spe^&*ak louder than words`, 9);
+    await createCustomQuote(`i LIKE)(&*(^) candy6666`, 6);
 
     await prisma.$disconnect();
 
