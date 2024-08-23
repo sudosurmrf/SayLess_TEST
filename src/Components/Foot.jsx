@@ -1,19 +1,13 @@
 import React from 'react';
-// import './Footer.css'; 
 
 const Foot = () => {
     return (
         <footer className="footer">
           <div className="container">
             <div className="row">
-              {/* <div className="col-md-4">
-                <h5>Company Info</h5>
-                <p>SayLess</p>
-                <p>SayLess@gmail.com</p>
-              </div> */}
               <div className="col-md-4">
                 <h5>Quick Links</h5>
-                <ul className="nav flex-column">
+                <ul className="foot flex-column">
                   <li><a href="#">Home</a></li>
                   <li><a href="#">About Us</a></li>
                   <li><a href="#">Contact Us</a></li>
@@ -22,7 +16,7 @@ const Foot = () => {
               </div>
               <div className="col-md-4">
                 <h5>Social Media</h5>
-                <ul className="nav flex-column">
+                <ul className="foot flex-column">
                   <li><a href="#">X</a></li>
                   <li><a href="#">Tik Tok</a></li>
                   <li><a href="#">Facebook</a></li>
