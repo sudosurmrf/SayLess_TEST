@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seed:dev": "npx prisma migrate reset --force && node ./prisma/db/seed.cjs"
+    "seed:dev": "npx prisma migrate reset --force && node ./prisma/db/seed.cjs",
+    "start:dev": "nodemon ./server.cjs"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",
