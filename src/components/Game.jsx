@@ -37,6 +37,14 @@ const Game = () => {
       setWinOrLose('Sorry, better luck next time.')
     });
 
+    socket.on("resetgame", () => {
+      setPlayerOneTurn(true);
+      setQuote(getRandomQuote(allQuotes));
+      setPlayerOneInput("");
+      setPlayerTwoInput("");
+      setShowGameResult(false);
+    });
+
   },[allQuotes])
 
   const playerOneTurnOver = () => {
@@ -52,6 +60,10 @@ const Game = () => {
     // this will need to do an API call besides the usual socket stuff to update the user table for win or loss
   };
 
+  const playAgain = () => {
+    socket.emit("playagain");
+  }
+
   return (
     <>
     { showGameResult ?
@@ -61,6 +73,7 @@ const Game = () => {
               Player 2 guessed `{playerTwoInput}`. <br />
             {winOrLose}
           </h3> <br />
+          <button onClick={() => {playAgain()}} type="button">Play Again?</button>
         </>
       : 
         showPlayerOneTurn ?
