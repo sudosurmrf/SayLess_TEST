@@ -34,6 +34,10 @@ io.on('connection', (socket) =>{
     io.emit("p2lose", { data })
   })
 
+  socket.on("playagain", () => {
+    io.emit("resetgame");
+  });
+
   socket.on('disconnect',() => {
     console.log('user disconnected');
   });
