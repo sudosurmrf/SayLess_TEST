@@ -9,8 +9,9 @@ const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
   const [quote, setQuote] = useState("");
 
-  // const [showLobby, setShowLobby] = useState(true);
-  const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(true);
+  const [showLobby, setShowLobby] = useState(true);
+  const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(false);
+  const [showPlayerTwoWait, setShowPlayerTwoWait] = useState(false);
   const [showPlayerTwoTurn, setShowPlayerTwoTurn] = useState(false);
   const [showGameResult, setShowGameResult] = useState(false);
 
@@ -22,13 +23,23 @@ const Game = () => {
     setAllQuotes(famousQuotes)
     setQuote(getRandomQuote(allQuotes));
 
+    socket.on("p1start", () => {
+      setShowLobby(false);
+      setShowPlayerOneTurn(true);
+    });
+
+    socket.on("p2wait", () => {
+      setShowLobby(false);
+      setShowPlayerTwoWait(true);
+    });
+
     socket.on("p1complete", ({ data }) => {
       setQuote(data.quote);
       setPlayerOneInput(data.playerOneInput);
       setShowPlayerOneTurn(false);
+      setShowPlayerTwoWait(false);
       setShowPlayerTwoTurn(true);
     });
-
 
     socket.on("p2won", ({ data }) =>{
       setPlayerTwoInput(data.playerTwoInput);
@@ -44,16 +55,22 @@ const Game = () => {
       setWinOrLose('Sorry, better luck next time.')
     });
 
-    socket.on("resetgame", () => {
+    socket.on("backtolobby", () => {
       setQuote(getRandomQuote(allQuotes));
       setPlayerOneInput("");
       setPlayerTwoInput("");
-      setShowPlayerOneTurn(true);
+      setShowLobby(true);
+      setShowPlayerOneTurn(false);
       setShowPlayerTwoTurn(false);
+      setShowPlayerTwoWait(false);
       setShowGameResult(false);
     });
 
   },[allQuotes])
+
+  const gameStart = () =>{
+    socket.emit("lobbysend")
+  }
 
   const playerOneTurnOver = () => {
     socket.emit("p1send", { quote, playerOneInput });
@@ -75,6 +92,15 @@ const Game = () => {
   return (
     <>
 
+      { showLobby ?
+        <>
+          <h2> Welcome to Say Less </h2>
+          <button onClick={() => {gameStart()}} type="button">Click Here to be Player 1</button>
+        </>
+        :
+        <></>
+      }
+
       { showPlayerOneTurn ?
         <>
           <h2> Player 1 Turn: {quote} </h2>
@@ -83,6 +109,14 @@ const Game = () => {
             <input value={playerOneInput} minLength="5" onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
             <button onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
           </form>
+        </>
+        :
+        <></>
+      }
+
+      { showPlayerTwoWait ?
+        <>
+          <h2> Its Player One's Turn, Please Wait Patiently </h2>
         </>
         :
         <></>

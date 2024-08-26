@@ -22,6 +22,11 @@ const io = new Server(server, {
 io.on('connection', (socket) =>{
   console.log('A user connected');
 
+  socket.on("lobbysend", () =>{
+    socket.emit("p1start");
+    socket.broadcast.emit("p2wait");
+  })
+
   socket.on("p1send", (data) => {
     io.emit("p1complete", { data });
   });
@@ -35,7 +40,7 @@ io.on('connection', (socket) =>{
   })
 
   socket.on("playagain", () => {
-    io.emit("resetgame");
+    io.emit("backtolobby");
   });
 
   socket.on('disconnect',() => {
