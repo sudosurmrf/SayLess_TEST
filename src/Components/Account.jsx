@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import UpdateUserDetails from './updateUserDetails';
 
 const Account = () => {
     const [username, setUsername] = useState("");
@@ -47,6 +48,8 @@ const Account = () => {
             {playBadges.map((badge)=> {<li>{badge.name}</li>})}
           </ol>
         </h3>
+                                       
+        <UpdateUserDetails />
 
         <button onClick={() => {logOut()}}>Log Out</button>
     </>
