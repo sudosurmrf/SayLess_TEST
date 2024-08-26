@@ -22,7 +22,7 @@ const Intro = () => {
            </ol>
           </h4>
           <input placeholder='Demo Vid'></input>
-          <button className="intro-button">Say Less! Play Now!</button>
+          <button className="intro-button">Say Less! Let's Play!</button>
 
 
       </>

@@ -104,10 +104,10 @@ const Game = () => {
       { showPlayerOneTurn ?
         <>
           <h2> Player 1 Turn: {quote} </h2>
-          <button onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
+          <button className="game-quote" onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
           <form>
             <input value={playerOneInput} minLength="5" onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
-            <button onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
+            <button className="game-shortening" onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
           </form>
         </>
         :

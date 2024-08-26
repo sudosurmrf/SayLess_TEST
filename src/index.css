@@ -50,7 +50,7 @@ h1 {
 } */
 
 .motto {
-    margin-top: -4%;
+    margin-top: -3%;
 }
 
 .rules {
@@ -92,7 +92,29 @@ input {
 }
 
 .intro-button {
-    background-color: #32CD32;
+    background-color: #FFF07C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: solid black 5px;
+    border-radius: 5px;
+    height: 3em;
+    width: 15%;
+    text-align: center;
+    color: #32CD32;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.intro-button:hover {
+    font-size: larger;
+    color: #32CD32;
+}
+
+.game-quote {
+    background-color: red;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,9 +130,31 @@ input {
     font-family: 'Trebuchet MS', sans-serif;
 }
 
-.intro-button:hover {
+.game-quote:hover {
     font-size: larger;
-    color: #FFF07C;
+    color: white;
+}
+
+.game-shortening {
+    background-color: #FFF07C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: solid black 5px;
+    border-radius: 5px;
+    height: 3em;
+    width: 15%;
+    text-align: center;
+    color: #32CD32;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.game-shortening:hover {
+    font-size: larger;
+    color: #32CD32;
 }
 
 .footer {
