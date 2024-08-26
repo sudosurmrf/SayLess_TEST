@@ -51,23 +51,35 @@ const syncAndSeed = async() => {
     await createCustomQuote(`go ahead make my day`, 9);
     await createCustomQuote(`i like candy`, 6);
 
+    //User 1- all win and play badges 
     await assignWinBadge(1, 1);
-    await assignWinBadge(2, 2);
-    await assignWinBadge(3, 3);
-    await assignWinBadge(4, 4);
-    await assignWinBadge(5, 5);
-    await assignWinBadge(6, 6);
-    await assignWinBadge(7, 7);
-    await assignWinBadge(8, 8);
+    await assignWinBadge(1, 2);
+    await assignWinBadge(1, 3);
+    await assignWinBadge(1, 4);
+    await assignWinBadge(1, 5);
+    await assignWinBadge(1, 6);
+    await assignWinBadge(1, 7);
+    await assignWinBadge(1, 8);
+    await assignPlayBadge(1, 1);
+    await assignPlayBadge(1, 2);
+    await assignPlayBadge(1, 3);
+    await assignPlayBadge(1, 4);
+    await assignPlayBadge(1, 5);
+    await assignPlayBadge(1, 6);
+    await assignPlayBadge(1, 7);
+    await assignPlayBadge(1, 8);
 
-    await assignPlayBadge(11, 1);
-    await assignPlayBadge(12, 2);
-    await assignPlayBadge(13, 3);
-    await assignPlayBadge(14, 4);
-    await assignPlayBadge(15, 5);
-    await assignPlayBadge(16, 6);
-    await assignPlayBadge(17, 7);
-    await assignPlayBadge(18, 8);
+    //User 2- one win badge and some play badges
+    await assignWinBadge(2, 1);
+    await assignPlayBadge(2, 1);
+    await assignPlayBadge(2, 2);
+
+    //User 3- one win badge and one play badge
+    await assignWinBadge(3, 1);
+    await assignPlayBadge(3, 1);
+
+    //User 4- no win badges and one play badge
+    await assignPlayBadge(4, 1);
 
     await prisma.$disconnect();
 
