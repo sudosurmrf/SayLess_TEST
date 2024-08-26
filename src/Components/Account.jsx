@@ -15,7 +15,7 @@ const Account = () => {
         const token = localStorage.getItem('token');
 
         try {
-            // api call to get user account, gameplay history,badges
+          // api call to get user account, gameplay history,badges
 
         } catch (error){
           console.log('Unable to get data', error)
