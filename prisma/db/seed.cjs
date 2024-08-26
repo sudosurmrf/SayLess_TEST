@@ -47,6 +47,8 @@ const syncAndSeed = async() => {
     await createPlayBadge("1,000th game!", 1000);
 
     await createCustomQuote(`actions speak louder than words`, 9);
+    await createCustomQuote(`its showtime`, 9);
+    await createCustomQuote(`go ahead make my day`, 9);
     await createCustomQuote(`i like candy`, 6);
 
     await assignWinBadge(1, 1);
