@@ -14,4 +14,17 @@ const createUser = async(username, password, email) => {
   }
 }
 
-module.exports = { createUser }
+const getUser = async(id) => {
+try {  
+  const foundUser = await prisma.user.findUniqueOrThrow({
+    where: {
+      id: id
+    }
+  })
+  return foundUser;
+} catch (error) {
+  return error;
+}
+}
+
+module.exports = { createUser, getUser }
