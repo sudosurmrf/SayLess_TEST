@@ -5,17 +5,13 @@ const Intro = () => {
       <>
       
         <div className="header">
-         <h1>
-          <span>SayLess</span>
-          <span>SayLess</span>
-          <span>SayLess</span>
-         </h1>
+         <h1>SayLess</h1>
         </div>
 
         <h2 className="motto">The fun phrase game you will be itching to play!</h2>
         <h3>SayLess is a game where your opponent attempts to guess an entire phrase correctly by using only half of the characters used in the original phrase.</h3>
         
-         <h2 className="rules">Rules</h2>
+        <h2 className="rules">Rules</h2>
           <h4>
            <ol>
             <li>Player One will create or select a phrase to use.</li>
@@ -25,6 +21,10 @@ const Intro = () => {
             <li>Players will earn points based on the amount of characters in the original phrase that was solved correctly!</li>
            </ol>
           </h4>
+          <input placeholder='Demo Vid'></input>
+          <button className="intro-button">Say Less! Play Now!</button>
+
+
       </>
 
 )};
