@@ -8,10 +8,14 @@ const socket = io.connect("http://localhost:3001");
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
   const [quote, setQuote] = useState("");
-  const [showPlayerOneTurn, setPlayerOneTurn] = useState(true);
+
+  // const [showLobby, setShowLobby] = useState(true);
+  const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(true);
+  const [showPlayerTwoTurn, setShowPlayerTwoTurn] = useState(false);
+  const [showGameResult, setShowGameResult] = useState(false);
+
   const [playerOneInput, setPlayerOneInput] = useState("");
   const [playerTwoInput, setPlayerTwoInput] = useState("");
-  const [showGameResult, setShowGameResult] = useState(false);
   const [winOrLose, setWinOrLose] = useState("");
 
   useEffect(()=>{
@@ -21,27 +25,31 @@ const Game = () => {
     socket.on("p1complete", ({ data }) => {
       setQuote(data.quote);
       setPlayerOneInput(data.playerOneInput);
-      setPlayerOneTurn(false);
+      setShowPlayerOneTurn(false);
+      setShowPlayerTwoTurn(true);
     });
 
 
     socket.on("p2won", ({ data }) =>{
       setPlayerTwoInput(data.playerTwoInput);
-      setWinOrLose("You won.")
+      setWinOrLose("You won.");
+      setShowPlayerTwoTurn(false);
       setShowGameResult(true);
     });
 
     socket.on("p2lose", ({ data }) =>{
       setPlayerTwoInput(data.playerTwoInput);
+      setShowPlayerTwoTurn(false);
       setShowGameResult(true);
       setWinOrLose('Sorry, better luck next time.')
     });
 
     socket.on("resetgame", () => {
-      setPlayerOneTurn(true);
       setQuote(getRandomQuote(allQuotes));
       setPlayerOneInput("");
       setPlayerTwoInput("");
+      setShowPlayerOneTurn(true);
+      setShowPlayerTwoTurn(false);
       setShowGameResult(false);
     });
 
@@ -66,34 +74,45 @@ const Game = () => {
 
   return (
     <>
-    { showGameResult ?
+
+      { showPlayerOneTurn ?
+        <>
+          <h2> Player 1 Turn: {quote} </h2>
+          <button onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
+          <form>
+            <input value={playerOneInput} minLength="5" onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
+            <button onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
+          </form>
+        </>
+        :
+        <></>
+      }
+
+      { showPlayerTwoTurn ?
+        <>
+          <h2> Player 2 Turn: {playerOneInput} </h2>
+            <form>
+              <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
+              <button onClick={() => {playerTwoTurnOver()}} type="button"> Submit Your Guess</button>
+            </form>
+        </>
+        :
+        <></>
+      }
+
+      { showGameResult ?
         <>
           <h1> The Original Quote was `{quote}`</h1> <br />
           <h3>  Player 1 shortened it to `{playerOneInput}`. <br />
-              Player 2 guessed `{playerTwoInput}`. <br />
-            {winOrLose}
+                Player 2 guessed `{playerTwoInput}`. <br />
+              {winOrLose}
           </h3> <br />
           <button onClick={() => {playAgain()}} type="button">Play Again?</button>
         </>
-      : 
-        showPlayerOneTurn ?
-          <>
-            <h2> Player 1 Turn: {quote} </h2>
-            <button onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
-            <form>
-              <input value={playerOneInput} minLength="5" onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
-              <button onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
-            </form>
-          </>
-        :
-          <>
-            <h2> Player 2 Turn: {playerOneInput} </h2>
-            <form>
-              <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
-          <button onClick={() => {playerTwoTurnOver()}} type="button"> Submit Your Guess</button>
-          </form>
-          </>
-    }
+        : 
+        <></>
+      }
+
     </>
   )
 }
