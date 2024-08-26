@@ -2,7 +2,6 @@ const prisma = require('./client.cjs');
 
 const createCustomQuote = async(text, userId) => {
   try {
-
     await prisma.customQuote.create({
       data: {
         text: text,
@@ -14,4 +13,20 @@ const createCustomQuote = async(text, userId) => {
   }
 }
 
-module.exports = { createCustomQuote }
+const getCustomQuotes = async(id) => {
+  try {
+    const customQuotes = await prisma.customQuote.findMany({
+      where: {
+        userId: id
+      },
+      select: {
+        text: true
+      }
+    })
+    return customQuotes;
+  } catch (error) {
+    return error;
+  }
+}
+
+module.exports = { createCustomQuote, getCustomQuotes }
