@@ -15,7 +15,7 @@ const createCustomQuote = async(text, userId) => {
 
 const getCustomQuotes = async(id) => {
   try {
-    const quoteRecords = await prisma.customQuote.findMany({
+    const customQuotes = await prisma.customQuote.findMany({
       where: {
         userId: id
       },
@@ -23,7 +23,6 @@ const getCustomQuotes = async(id) => {
         text: true
       }
     })
-    const customQuotes = quoteRecords.map(record => record.text);
     return customQuotes;
   } catch (error) {
     return error;
