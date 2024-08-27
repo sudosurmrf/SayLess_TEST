@@ -49,8 +49,8 @@ const Login = () => {
     }
 
     return (
-        <>
-          <form>
+    <>
+      <form className="login">
         {
           //add username for register and login
             showLogin ? 
