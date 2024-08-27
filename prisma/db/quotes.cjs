@@ -8,8 +8,9 @@ const createCustomQuote = async(text, userId) => {
         userId: userId
       }
     })
+    return { success: true, text: text };
   } catch (error) {
-    return error;
+    return error.message;
   }
 }
 
@@ -25,7 +26,7 @@ const getCustomQuotes = async(id) => {
     })
     return customQuotes;
   } catch (error) {
-    return error;
+    return error.message;
   }
 }
 
