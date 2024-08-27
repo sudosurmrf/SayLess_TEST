@@ -49,24 +49,29 @@ const Login = () => {
     }
 
     return (
-        <>
-          <form>
+    <>
+      <div className="header">
+         <h1>SayLess</h1>
+        </div>
+
+      <h2>Sign in Below</h2>
+      <form className="login">
         {
           //add username for register and login
             showLogin ? 
              null :
              <>
-              
               <input className="login" value={emailInput} onChange={(event) => { setEmailInput(event.target.value) }} type="email" placeholder="email"/>
              </>
         }
-
         <input className="login" value={usernameInput} onChange={(event) => { setUsernameInput(event.target.value)}} placeholder="username" />
         <input className="login" value={passwordInput} onChange={(event) => { setPasswordInput(event.target.value) }} type="password" placeholder="password"/>
+        </form>
+
         {
             showLogin ? <button>Log In</button> : <button onClick={register}>Register</button>
         }
-        </form>
+        
         {
             showLogin ?
                 <p>Not a Member? Say Less! <button onClick={() => { setShowLogin(false) }}>Register now!</button></p>:

@@ -13,10 +13,6 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-/* .navbar-brand img {
-    width: 100px;
-    border-radius: 20px;
-} */
 .nav-links {
     list-style: none;
     margin: 0;
@@ -35,9 +31,6 @@ body {
     color: #FFF07C;
 }
 
-h1 {
-    /* text-align: center;*/
-} 
 .header{
     text-align: center;
     color: #FFF07C;
@@ -45,20 +38,14 @@ h1 {
     text-transform: uppercase;
     margin-top: -3%;
 }
-/* .header:hover{
-    font-size: 5em;
-} */
-
 .motto {
     margin-top: -3%;
 }
-
 .rules {
     color: red;  
     text-align: center;
     margin-top: auto;
 }
-
 
 h2 {
     text-align: center;
@@ -71,7 +58,6 @@ h2 {
     text-align: center;
     color: #FFF07C;
     font-size: 3em;
-    /* text-transform: uppercase; */
     margin-top: 2%;
 }
 
@@ -87,35 +73,11 @@ h4 {
     color: red;
 }
 
-button {
-    background-color: #FFF07C;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    border: solid black 5px;
-    border-radius: 5px;
-    height: 3em;
-    width: 15%;
+p {
     text-align: center;
-    color: #32CD32;
-    font-family: 'Trebuchet MS', sans-serif; 
 }
 
-.login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2em;
-    width: 50%;
-    /* border: solid 5px; */
-    /* border-radius: 20px; */
-    margin: auto;
-}
-
-input {
+.intro-demo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,6 +86,46 @@ input {
     border: solid 5px;
     border-radius: 20px;
     margin: auto;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 7em;
+    width: 50%;
+    margin: auto;
+    margin-top: 1%;
+}
+
+input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: solid 4px;
+    border-radius: 5px;
+}
+
+button {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+    border: solid black 4px;
+    border-radius: 5px;
+    height: 3em;
+    width: 10%;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif; 
+}
+
+button:hover {
+    font-size: larger;
+    color: white;
 }
 
 .intro-button {
@@ -142,7 +144,6 @@ input {
     color: #32CD32;
     font-family: 'Trebuchet MS', sans-serif;
 }
-
 .intro-button:hover {
     font-size: larger;
     color: #32CD32;
@@ -199,11 +200,11 @@ input {
     justify-content: center;
     margin: auto;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 20%;
     border: solid black 5px;
     border-radius: 5px;
     height: 3em;
-    width: 15%;
+    width: auto;
     text-align: center;
     color: white;
     font-family: 'Trebuchet MS', sans-serif;
@@ -216,12 +217,12 @@ input {
 
 
 .footer {
-    /* position: absolute; */
-    margin-bottom: 0px;
+    position: absolute;
     background-color: #32CD32; 
     color: white; 
-    padding: 0rem;
+    padding: 1rem;
     width: 100%;
+    margin-top: 20%;
 }
 .container-foot {
     max-width: 1140px;
