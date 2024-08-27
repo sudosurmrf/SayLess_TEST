@@ -18,10 +18,10 @@ model User {
   username      String   @db.VarChar(50)
   password      String   @db.VarChar(50)
   email         String   @db.VarChar(50)
-  wins          Int?
-  losses        Int?
-  avatarId      Int?
-  score         Int?
+  wins          Int?     @default(0)
+  losses        Int?     @default(0)
+  avatarId      Int?     @default(1)
+  score         Int?     @default(0)
   customQuotes  CustomQuote[]
   winBadges     WinBadge[]
   playBadges    PlayBadge[]
