@@ -13,6 +13,7 @@ const Game = () => {
   const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(false);
   const [showPlayerTwoWait, setShowPlayerTwoWait] = useState(false);
   const [showPlayerTwoTurn, setShowPlayerTwoTurn] = useState(false);
+  const [showPlayerOneWait, setShowPlayerOneWait] = useState(false);
   const [showGameResult, setShowGameResult] = useState(false);
 
   const [playerOneInput, setPlayerOneInput] = useState("");
@@ -33,7 +34,7 @@ const Game = () => {
       setShowPlayerTwoWait(true);
     });
 
-    socket.on("p1complete", ({ data }) => {
+    socket.on("p2start", ({ data }) => {
       setQuote(data.quote);
       setPlayerOneInput(data.playerOneInput);
       setShowPlayerOneTurn(false);
@@ -41,16 +42,24 @@ const Game = () => {
       setShowPlayerTwoTurn(true);
     });
 
+    socket.on("p1wait", () => {
+      setShowPlayerOneTurn(false);
+      setShowPlayerTwoWait(false);
+      setShowPlayerOneWait(true);
+    });
+
     socket.on("p2won", ({ data }) =>{
       setPlayerTwoInput(data.playerTwoInput);
       setWinOrLose("You won.");
       setShowPlayerTwoTurn(false);
+      setShowPlayerOneWait(false);
       setShowGameResult(true);
     });
 
     socket.on("p2lose", ({ data }) =>{
       setPlayerTwoInput(data.playerTwoInput);
       setShowPlayerTwoTurn(false);
+      setShowPlayerOneWait(false);
       setShowGameResult(true);
       setWinOrLose('Sorry, better luck next time.')
     });
@@ -63,6 +72,7 @@ const Game = () => {
       setShowPlayerOneTurn(false);
       setShowPlayerTwoTurn(false);
       setShowPlayerTwoWait(false);
+      setShowPlayerOneWait(false);
       setShowGameResult(false);
     });
 
@@ -129,6 +139,14 @@ const Game = () => {
               <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
               <button onClick={() => {playerTwoTurnOver()}} type="button"> Submit Your Guess</button>
             </form>
+        </>
+        :
+        <></>
+      }
+
+      { showPlayerOneWait ?
+        <>
+          <h2> Its Player Two's Turn, Please Wait Patiently </h2>
         </>
         :
         <></>
