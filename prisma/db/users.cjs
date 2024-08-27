@@ -20,6 +20,14 @@ try {
   const foundUser = await prisma.user.findUniqueOrThrow({
     where: {
       id: id
+    },
+    select: {
+      id: true,
+      username: true,
+      wins: true,
+      losses: true,
+      avatarId: true,
+      score: true
     }
   })
   return foundUser;
