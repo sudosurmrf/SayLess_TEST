@@ -46,4 +46,36 @@ const assignPlayBadge = async(userId, playBadgeId) => {
   }
 }
 
-module.exports = { assignWinBadge, assignPlayBadge }
+const getWinBadges = async(id) => {
+  try {
+    const winBadges = await prisma.user.findUniqueOrThrow({
+      where: {
+        id: id
+      },
+      select: {
+        winBadges: true
+      }
+    })
+    return winBadges;
+  } catch (error) {
+    return error
+  }
+}
+
+const getPlayBadges = async(id) => {
+  try {
+    const playBadges = await prisma.user.findUniqueOrThrow({
+      where: {
+        id: id
+      },
+      select: {
+        playBadges: true
+      }
+    })
+    return playBadges;
+  } catch (error) {
+    return error
+  }
+}
+
+module.exports = { assignWinBadge, assignPlayBadge, getWinBadges, getPlayBadges }
