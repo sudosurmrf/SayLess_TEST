@@ -9,7 +9,7 @@ const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
   const [quote, setQuote] = useState("");
 
-  const [maxLengthVariable, setMaxLengthVariable] = useState(25);
+  const [maxLengthVariable, setMaxLengthVariable] = useState(20);
 
   const [showLobby, setShowLobby] = useState(true);
   const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(false);
@@ -80,22 +80,26 @@ const Game = () => {
 
   },[allQuotes])
 
+  const countWordsEasy = (text) => {
+    let noVowelsNoSpace = text.replace(/[aeiou\s]/g,'');
+    return noVowelsNoSpace.length;
+  }
 
-  const countWords = (text) => {
-    let words = text.split(" ");
-    return words.length
+  const countWordsHard = (text) => {
+    let wordsArray = text.split(" ");
+    return wordsArray.length;
   }
 
   const setMaxEasy = () =>{
-    setMaxLengthVariable(25)
+    setMaxLengthVariable(countWordsEasy(quote));
   }
 
   const setMaxHard = () => {
-    setMaxLengthVariable(countWords(quote))
+    setMaxLengthVariable(countWordsHard(quote));
   }
 
   const gameStart = () =>{
-    socket.emit("lobbysend")
+    socket.emit("lobbysend");
   }
 
   const playerOneTurnOver = () => {
