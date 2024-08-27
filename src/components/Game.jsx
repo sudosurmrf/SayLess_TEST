@@ -9,6 +9,8 @@ const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
   const [quote, setQuote] = useState("");
 
+  const [maxLengthVariable, setMaxLengthVariable] = useState(25);
+
   const [showLobby, setShowLobby] = useState(true);
   const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(false);
   const [showPlayerTwoWait, setShowPlayerTwoWait] = useState(false);
@@ -78,6 +80,20 @@ const Game = () => {
 
   },[allQuotes])
 
+
+  const countWords = (text) => {
+    let words = text.split(" ");
+    return words.length
+  }
+
+  const setMaxEasy = () =>{
+    setMaxLengthVariable(25)
+  }
+
+  const setMaxHard = () => {
+    setMaxLengthVariable(countWords(quote))
+  }
+
   const gameStart = () =>{
     socket.emit("lobbysend")
   }
@@ -115,8 +131,10 @@ const Game = () => {
         <>
           <h2> Player 1 Turn: {quote} </h2>
           <button className="game-quote" onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
+          <button onClick={() => {setMaxEasy()}} type="button">Make the Game Easy!</button>
+          <button onClick={() => {setMaxHard()}} type="button">Make the Game Hard!</button> <br />
           <form>
-            <input value={playerOneInput} minLength="5" onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
+            <input value={playerOneInput} minLength="2" maxLength={maxLengthVariable} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
             <button className="game-shortening" onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
           </form>
         </>
