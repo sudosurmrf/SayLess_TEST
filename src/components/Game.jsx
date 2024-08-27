@@ -81,7 +81,7 @@ const Game = () => {
   },[allQuotes])
 
   const countWordsEasy = (text) => {
-    let noVowels = text.replace(/[aeiou\s]/g,'');
+    let noVowels = text.replace(/[aeiou]/g,'');
     return noVowels.length;
   }
 
@@ -93,7 +93,7 @@ const Game = () => {
   const countWordsExtreme = (text) => {
     let wordsArray = text.split(" ");
     return wordsArray.length;
-  }
+  } 
 
   const setMaxEasy = () =>{
     setMaxLengthVariable(countWordsEasy(quote));
