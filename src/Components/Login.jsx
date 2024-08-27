@@ -75,7 +75,7 @@ const Login = () => {
         {
             showLogin ?
                 <p>Not a Member? Say Less! <button onClick={() => { setShowLogin(false) }}>Register now!</button></p>:
-                <p>Already a Member? <button onClick={() => { setShowLogin(true) }}>Log In</button> here!</p>
+                <p>Already a Member? <button onClick={() => { setShowLogin(true) }}>Log In</button></p>
             }
         </>
     );
