@@ -12,14 +12,14 @@ router.get('/:id', async(req, res, next) => {
 
     const user = await getUser(id);
     const customQuotes = await getCustomQuotes(id);
-    const winBadges = await getWinBadges(id);
-    const playBadges = await getPlayBadges(id);
+    const userWinBadges = await getWinBadges(id);
+    const userPlayBadges = await getPlayBadges(id);
     
     const accountInfo = {
       user,
       customQuotes,
-      winBadges,
-      playBadges
+      userWinBadges,
+      userPlayBadges
   };
     
     res.send(accountInfo);
