@@ -67,6 +67,13 @@ h2 {
     margin-bottom: auto;
 }
 
+.game-h2 {
+    text-align: center;
+    color: #FFF07C;
+    font-size: 3em;
+    /* text-transform: uppercase; */
+    margin-top: 2%;
+}
 
 h3 {
     text-align: center;
@@ -157,9 +164,31 @@ input {
     color: #32CD32;
 }
 
+.game-p1 {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: solid black 5px;
+    border-radius: 5px;
+    height: 3em;
+    width: 15%;
+    text-align: center;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.game-p1:hover {
+    font-size: larger;
+    color: whtie;
+}
+
 .footer {
-    position: absolute;
-    /* margin-top: 100px; */
+    /* position: absolute; */
+    margin-bottom: 0px;
     background-color: #32CD32; 
     color: white; 
     padding: 0rem;
