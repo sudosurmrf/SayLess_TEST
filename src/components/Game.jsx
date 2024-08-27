@@ -104,8 +104,8 @@ const Game = () => {
 
       { showLobby ?
         <>
-          <h2> Welcome to Say Less </h2>
-          <button onClick={() => {gameStart()}} type="button">Click Here to be Player 1</button>
+          <h2 className="game-h2"> Welcome to Say Less </h2>
+          <button className="game-p1" onClick={() => {gameStart()}} type="button">Click Here to be Player One</button>
         </>
         :
         <></>
