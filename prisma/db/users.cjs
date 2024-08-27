@@ -9,8 +9,9 @@ const createUser = async(username, password, email) => {
         email: email
       }
     })
+    return { success: true, username: username };
   } catch (error) {
-    return error;
+    return { success: false, error: error.message };
   }
 }
 
@@ -23,7 +24,7 @@ try {
   })
   return foundUser;
 } catch (error) {
-  return error;
+  return error.message;
 }
 }
 
