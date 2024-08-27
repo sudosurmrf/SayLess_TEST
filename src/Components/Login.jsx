@@ -1,6 +1,53 @@
 import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const [showLogin, setShowLogin] = useState(true);
+    const [usernameInput, setUsernameInput] = useState("");
+    const [emailInput, setEmailInput] = useState("");
+    const [passwordInput, setPasswordInput] = useState("");
+
+    const navigate = useNavigate();
+
+    const register = async(event) => {
+        event.preventDefault();
+        const response = await fetch('https://.com/api/users/register', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: usernameInput,
+                email: emailInput,
+                password: passwordInput
+            })
+        });
+        
+        const json = await response.json();
+        setUsernameInput("");
+        setEmailInput("");
+        setPasswordInput("");
+    }
+    
+    const login = async(event) => {
+        event.preventDefault();
+        const response = await fetch('https://.com/api/users/login', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: usernameInput,
+                password: passwordInput
+            })
+        });
+        const json = await response.json();
+        console.log(json.access_token);
+        navigate('/')
+        
+    }
+
     return (
         <>
           <form>
