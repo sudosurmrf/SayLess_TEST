@@ -81,7 +81,7 @@ const Game = () => {
   },[allQuotes])
 
   const countWordsEasy = (text) => {
-    let noVowelsNoSpace = text.replace(/[aeiou\s]/g,'');
+    let noVowelsNoSpace = text.replace(/[aeiou]/g,'');
     return noVowelsNoSpace.length;
   }
 
