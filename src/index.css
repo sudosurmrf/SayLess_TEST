@@ -87,6 +87,17 @@ h4 {
     color: red;
 }
 
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 50%;
+    /* border: solid 5px; */
+    /* border-radius: 20px; */
+    margin: auto;
+}
+
 input {
     display: flex;
     align-items: center;
@@ -185,6 +196,7 @@ input {
     font-size: larger;
     color: whtie;
 }
+
 
 .footer {
     /* position: absolute; */
