@@ -28,7 +28,8 @@ io.on('connection', (socket) =>{
   })
 
   socket.on("p1send", (data) => {
-    io.emit("p1complete", { data });
+    socket.emit("p1wait");
+    socket.broadcast.emit("p2start", { data });
   });
 
   socket.on("p2sendwin", (data) =>{
