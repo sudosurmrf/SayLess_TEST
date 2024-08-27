@@ -232,4 +232,7 @@ input {
     color: #FFF07C;
 }
 
-
+#account-user-details {
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -36,18 +36,20 @@ const Account = () => {
 
         <h1>Your Account History</h1> <br /><br />
 
-        <h3>Games Played: {gamesPlayed} <br />
-          Games Won: {gamesWon} <br />
-          Games Lost: {gamesLost} <br/>
-          W/L Ratio: {}%
-        </h3> <br /> <br />
+        <section id="account-user-details"> 
+          <h3>Games Played: {gamesPlayed} <br />
+            Games Won: {gamesWon} <br />
+            Games Lost: {gamesLost} <br/>
+            W/L Ratio: {}%
+          </h3> <br /> <br />
 
-        <h3>Your Badges:
-          <ol>
-            {winBadges.map((badge)=> {<li>{badge.name}</li>})}
-            {playBadges.map((badge)=> {<li>{badge.name}</li>})}
-          </ol>
-        </h3>
+          <h3>Your Badges:
+            <ol>
+            { winBadges.map((badge)=> {<li>{badge.name}</li>})}
+              {playBadges.map((badge)=> {<li>{badge.name}</li>})}
+            </ol>
+          </h3>
+        </section>
                                        
         <UpdateUserDetails />
 
