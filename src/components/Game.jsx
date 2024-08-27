@@ -81,11 +81,16 @@ const Game = () => {
   },[allQuotes])
 
   const countWordsEasy = (text) => {
-    let noVowelsNoSpace = text.replace(/[aeiou]/g,'');
+    let noVowels = text.replace(/[aeiou\s]/g,'');
+    return noVowels.length;
+  }
+
+  const countWordsIntermediate = (text) =>{
+    let noVowelsNoSpace = text.replace(/[aeiou\s]/g,'');
     return noVowelsNoSpace.length;
   }
 
-  const countWordsHard = (text) => {
+  const countWordsExtreme = (text) => {
     let wordsArray = text.split(" ");
     return wordsArray.length;
   }
@@ -94,8 +99,12 @@ const Game = () => {
     setMaxLengthVariable(countWordsEasy(quote));
   }
 
-  const setMaxHard = () => {
-    setMaxLengthVariable(countWordsHard(quote));
+  const setMaxIntermediate = () =>{
+    setMaxLengthVariable(countWordsIntermediate(quote));
+  }
+
+  const setMaxExtreme = () => {
+    setMaxLengthVariable(countWordsExtreme(quote));
   }
 
   const gameStart = () =>{
@@ -135,8 +144,9 @@ const Game = () => {
         <>
           <h2> Player 1 Turn: {quote} </h2>
           <button className="game-quote" onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
-          <button onClick={() => {setMaxEasy()}} type="button">Make the Game Easy!</button>
-          <button onClick={() => {setMaxHard()}} type="button">Make the Game Hard!</button> <br />
+          <button onClick={() => {setMaxEasy()}} type="button">Easy Difficulty</button>
+          <button onClick={() => {setMaxIntermediate()}} type="button">Intermediate Difficulty</button>
+          <button onClick={() => {setMaxExtreme()}} type="button">Extreme Difficulty</button> <br />
           <form>
             <input value={playerOneInput} minLength="2" maxLength={maxLengthVariable} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
             <button className="game-shortening" onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
