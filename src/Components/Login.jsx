@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [showLogin, setShowLogin] = useState(true);
-    const [nameInput, setNameInput] = useState("");
+    const [usernameInput, setUsernameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
 
@@ -18,14 +18,14 @@ const Login = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name: nameInput,
+                username: usernameInput,
                 email: emailInput,
                 password: passwordInput
             })
         });
         
         const json = await response.json();
-        setNameInput("");
+        setUsernameInput("");
         setEmailInput("");
         setPasswordInput("");
     }
@@ -38,7 +38,7 @@ const Login = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: emailInput,
+                username: usernameInput,
                 password: passwordInput
             })
         });
@@ -52,13 +52,16 @@ const Login = () => {
         <>
           <form>
         {
+          //add username for register and login
             showLogin ? 
              null :
              <>
-              <input className="login" value={nameInput} onChange={(event) => { setNameInput(event.target.value)}} placeholder="name" />
+              
+              <input className="login" value={emailInput} onChange={(event) => { setEmailInput(event.target.value) }} type="email" placeholder="email"/>
              </>
         }
-        <input className="login" value={emailInput} onChange={(event) => { setEmailInput(event.target.value) }} type="email" placeholder="email"/>
+
+        <input className="login" value={usernameInput} onChange={(event) => { setUsernameInput(event.target.value)}} placeholder="username" />
         <input className="login" value={passwordInput} onChange={(event) => { setPasswordInput(event.target.value) }} type="password" placeholder="password"/>
         {
             showLogin ? <button>Log In</button> : <button onClick={register}>Register</button>
@@ -67,8 +70,7 @@ const Login = () => {
         {
             showLogin ?
                 <p>Not a Member? Say Less! <button onClick={() => { setShowLogin(false) }}>Register now!</button></p>:
-                <p>Already a Member? <button onClick={() => { setShowLogin(true) }}>Log In</button> here!
-                </p>
+                <p>Already a Member? <button onClick={() => { setShowLogin(true) }}>Log In</button> here!</p>
             }
         </>
     );

@@ -87,6 +87,23 @@ h4 {
     color: red;
 }
 
+button {
+    background-color: #FFF07C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: solid black 5px;
+    border-radius: 5px;
+    height: 3em;
+    width: 15%;
+    text-align: center;
+    color: #32CD32;
+    font-family: 'Trebuchet MS', sans-serif; 
+}
+
 .login {
     display: flex;
     align-items: center;
