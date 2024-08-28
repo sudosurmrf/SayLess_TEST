@@ -1,5 +1,6 @@
 const prisma = require('./client.cjs');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const createUser = async(username, password, email) => {
   try {
@@ -18,24 +19,29 @@ const createUser = async(username, password, email) => {
   }
 }
 
-const getUser = async(id) => {
+const getUser = async(usernameToTry, passwordToTry) => {
 try {  
-  const foundUser = await prisma.user.findUniqueOrThrow({
+  const { id, username, password } = await prisma.user.findUnique({
     where: {
-      id: id
+      username: usernameToTry
     },
     select: {
       id: true,
       username: true,
-      wins: true,
-      losses: true,
-      avatarId: true,
-      score: true
+      password: true
     }
   })
-  return foundUser;
+
+  const passwordMatch = await bcrypt.compare(passwordToTry, password);
+
+  if (username && passwordMatch) {
+    const assignedToken = await jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
+    return (assignedToken);
+  } else {
+    throw new Error('Either username or password do not match our records.')
+  }
 } catch (error) {
-  return error.message;
+  return 'Either username or password do not match our records.';
 }
 }
 
