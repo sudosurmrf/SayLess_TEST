@@ -56,7 +56,7 @@ router.patch('/change-pw'), verifyToken, async (req, res, next) => {
 };
 
 // change email
-app.put('/api/users/change-email', verifyToken, async (req, res, next) => {
+router.patch('/api/users/change-email', verifyToken, async (req, res, next) => {
   try {
     const user = await getUserByToken(req.user);
     const { newEmail } = req.body;
