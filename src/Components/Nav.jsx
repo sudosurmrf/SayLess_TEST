@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Nav = () => {
+    const [token, setToken] = useState(null)
+
+    useEffect(()=> {
+        const jsontoken = localStorage.getItem('token');
+        setToken(jsontoken);
+    },[token])
+
     return (
         <>
          <nav className="navbar">
@@ -10,8 +17,12 @@ const Nav = () => {
             <ul className="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/game">Let's Play!</a></li>
-                <li><a href="/login">Login</a></li>
+                {
+                token?
                 <li><a href="/account">My Account</a></li>
+                :
+                <li><a href="/login">Login</a></li>
+                }
             </ul>
          </nav>
         </>
