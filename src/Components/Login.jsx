@@ -13,13 +13,12 @@ const Login = () => {
 
   const logInUser = async () => {
     try {
-      const response = await axios.post('/api/v1/users/login', {
+      const response = await axios.get('/api/v1/users/login', {
         username: usernameInput,
         password: passwordInput,
       });
           
       if (response.status === 200) {
-        console.log(response.data)
         localStorage.setItem('token', response.data.token); 
         navigate('/account')
       } else {
