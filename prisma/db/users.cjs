@@ -22,29 +22,44 @@ const createUser = async(username, password, email) => {
 }
 
 const getUser = async(usernameToTry, passwordToTry) => {
-try {  
-  const { id, username, password } = await prisma.user.findUnique({
-    where: {
-      username: usernameToTry
-    },
-    select: {
-      id: true,
-      username: true,
-      password: true
+  try {  
+    const { id, username, password } = await prisma.user.findUnique({
+      where: {
+        username: usernameToTry
+      },
+      select: {
+        id: true,
+        username: true,
+        password: true
+      }
+    })
+
+    const passwordMatch = await bcrypt.compare(passwordToTry, password);
+
+    if (username && passwordMatch) {
+      const assignedToken = await jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
+      return (assignedToken);
+    } else {
+      throw new Error('Either username or password do not match our records.')
     }
-  })
-
-  const passwordMatch = await bcrypt.compare(passwordToTry, password);
-
-  if (username && passwordMatch) {
-    const assignedToken = await jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
-    return (assignedToken);
-  } else {
-    throw new Error('Either username or password do not match our records.')
+  } catch (error) {
+    return 'Either username or password do not match our records.';
   }
-} catch (error) {
-  return 'Either username or password do not match our records.';
-}
 }
 
-module.exports = { createUser, getUser }
+const changeEmail = async(userId, newEmail) => {
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        email: newEmail
+      }
+    })
+  } catch (error) {
+    return (`Couldn't change email`, error.message);
+  }
+}
+
+module.exports = { createUser, getUser, changeEmail }
