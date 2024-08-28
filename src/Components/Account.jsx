@@ -7,17 +7,34 @@ const Account = () => {
     const [gamesWon, setGamesWon] = useState(0);
     const [gamesLost, setGamesLost] = useState(0);
     const [gamesPlayed, setGamesPlayed] = useState(0);
-    const [winBadges, setWinBadges] = (null);
-    const [playBadges, setPlayBadges] = (null);
+    const [winBadges, setWinBadges] = ([]);
+    const [playBadges, setPlayBadges] = ([]);
     const navigate = useNavigate();
 
     useEffect(() => {
       const getUserData = async () =>{
         const token = localStorage.getItem('token');
 
+        // double check axios import when pulled
         try {
-          // api call to get user account, gameplay history,badges
+          const response = await axios.get('/api/v1/account/userdetails', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
 
+          if(response.ok) {
+            const { data } = response
+
+            // if we were using axios we would deconstruct it so you'd get const { user, customQuotes, userWinBadges, userWlayBadges  } = data
+            setUsername(data.user.username);
+            setGamesWon(data.user.wins)
+            setGamesLost(data.user.losses);
+            // setGamesPlayed() this is going to be more complicated
+            // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
+            setWinBadges(data.userWinBadges.winBadges);
+            setPlayBadges(data.userPlayBadges.playBadges);
+          }
         } catch (error){
           console.log('Unable to get data', error)
           navigate('Login');

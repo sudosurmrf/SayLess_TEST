@@ -21,7 +21,7 @@ const Intro = () => {
             <li>Players will earn points based on the amount of characters in the original phrase that was solved correctly!</li>
            </ol>
           </h4>
-          <input placeholder='Demo Vid'></input>
+          <input className="intro-demo" placeholder='Demo Vid'></input>
           <button className="intro-button">Say Less! Let's Play!</button>
 
 
