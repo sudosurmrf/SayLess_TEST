@@ -1,7 +1,10 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const { createUser, getUser, changePassword, changeEmail } = require('../prisma/db/users.cjs')
+const { createUser, getUser, getUserByToken, changePassword, changeEmail } = require('../prisma/db/users.cjs')
+const { getCustomQuotes } = require('../prisma/db/quotes.cjs');
+const { getWinBadges, getPlayBadges } = require('../prisma/db/users-badges.cjs');
 
 router.use(express.json())
 
@@ -42,6 +45,28 @@ router.get('/login', async(req, res, next) => {
     next(error);
   }
 });
+
+// account page info
+router.get('/userdetails', verifyToken, async(req, res, next) => {
+  try {
+    console.log(req.user)
+    const user = await getUserByToken(req.user);
+    const customQuotes = await getCustomQuotes(user.id);
+    const userWinBadges = await getWinBadges(user.id);
+    const userPlayBadges = await getPlayBadges(user.id);
+    
+    const accountInfo = {
+      user,
+      customQuotes,
+      userWinBadges,
+      userPlayBadges
+  };
+
+    res.send(accountInfo);
+  } catch (error) {
+    next(error);
+  }
+})
 
 // change password
 router.patch('/change-pw'), verifyToken, async (req, res, next) => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import UpdateUserDetails from './updateUserDetails';
+import axios from 'axios';
 
 const Account = () => {
     const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ const Account = () => {
 
         // double check axios import when pulled
         try {
-          const response = await axios.get('/api/v1/account/userdetails', {
+          const response = await axios.get('/api/v1/users/userdetails', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -25,6 +26,7 @@ const Account = () => {
 
           if(response.ok) {
             const { data } = response
+            console.log(data)
 
             // if we were using axios we would deconstruct it so you'd get const { user, customQuotes, userWinBadges, userWlayBadges  } = data
             setUsername(data.user.username);
@@ -32,12 +34,12 @@ const Account = () => {
             setGamesLost(data.user.losses);
             // setGamesPlayed() this is going to be more complicated
             // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
-            setWinBadges(data.userWinBadges.winBadges);
-            setPlayBadges(data.userPlayBadges.playBadges);
+            // setWinBadges(data.userWinBadges.winBadges);
+            // setPlayBadges(data.userPlayBadges.playBadges);
           }
         } catch (error){
           console.log('Unable to get data', error)
-          navigate('Login');
+          // navigate('/Login');
         };   
       }
     getUserData()
@@ -60,12 +62,12 @@ const Account = () => {
             W/L Ratio: {}%
           </h3> <br /> <br />
 
-          <h3>Your Badges:
+          {/* <h3>Your Badges:
             <ol>
             { winBadges.map((badge)=> {<li>{badge.name}</li>})}
               {playBadges.map((badge)=> {<li>{badge.name}</li>})}
             </ol>
-          </h3>
+          </h3> */}
         </section>
                                        
         <UpdateUserDetails />
