@@ -49,11 +49,10 @@ router.get('/login', async(req, res, next) => {
 // account page info
 router.get('/userdetails', verifyToken, async(req, res, next) => {
   try {
-    console.log(req.user)
-    const user = await getUserByToken(req.user);
-    const customQuotes = await getCustomQuotes(user.id);
-    const userWinBadges = await getWinBadges(user.id);
-    const userPlayBadges = await getPlayBadges(user.id);
+    const user = req.user.username
+    const customQuotes = await getCustomQuotes(req.user.userId);
+    const userWinBadges = await getWinBadges(req.user.userId);
+    const userPlayBadges = await getPlayBadges(req.user.userId);
     
     const accountInfo = {
       user,
