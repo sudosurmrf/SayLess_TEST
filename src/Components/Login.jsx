@@ -11,6 +11,25 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const logInUser = async () => {
+    try {
+      const response = await axios.post('/api/v1/users/login', {
+        username: usernameInput,
+        password: passwordInput,
+      });
+          
+      if (response.status === 200) {
+        console.log(response.data)
+        localStorage.setItem('token', response.data.token); 
+        navigate('/account')
+      } else {
+        console.log(`Login failed:`, response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    };
+  };
+
   const registerUser = async () => {
     if (passwordInput === secondaryPasswordInput) {
       try {
@@ -30,25 +49,6 @@ const Login = () => {
         setPasswordInput("");
         setSecondaryPasswordInput("");
     }
-  };
-    
-  const logInUser = async () => {
-    try {
-      const response = await axios.post('/api/v1/userslogin', {
-        username: usernameInput,
-        password: passwordInput,
-      });
-          
-      if (response.status === 200) {
-        console.log(response.data)
-        localStorage.setItem('token', response.data.token); 
-        navigate('/account')
-      } else {
-        console.log(`Login failed:`, response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    };
   };
 
     return (
