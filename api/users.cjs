@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const { createUser, getUser, getUserByToken, changePassword, changeEmail } = require('../prisma/db/users.cjs')
+const { createUser, getUser, changePassword, changeEmail } = require('../prisma/db/users.cjs')
 const { getCustomQuotes } = require('../prisma/db/quotes.cjs');
 const { getWinBadges, getPlayBadges } = require('../prisma/db/users-badges.cjs');
 
@@ -70,9 +70,8 @@ router.get('/userdetails', verifyToken, async(req, res, next) => {
 // change password
 router.patch('/change-pw'), verifyToken, async (req, res, next) => {
   try {
-    const user = await getUserByToken(req.user);
     const { newPassword } = req.body;
-    await changePassword(user.id, newPassword);
+    await changePassword(req.user.id, newPassword);
     res.status(200).json({ message: 'Password Change Successful'});
   } catch (err) {
     res.status(500).json({ message: 'Password Change Error', error:err.message});
@@ -82,9 +81,8 @@ router.patch('/change-pw'), verifyToken, async (req, res, next) => {
 // change email
 router.patch('/change-email', verifyToken, async (req, res, next) => {
   try {
-    const user = await getUserByToken(req.user);
     const { newEmail } = req.body;
-    await changeEmail(user.id, newEmail);
+    await changeEmail(req.user.id, newEmail);
     res.status(200).json({ message: 'Email Change Successful' });
   } catch (err) {
     res.status(500).json({ message: 'Email Change Failed', error: err.message });
