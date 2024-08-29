@@ -11,7 +11,7 @@ const UpdateUserDetails = () => {
   const changeEmail = async(event) => {
     event.preventDefault();
       try{
-        const response = await axios.patch('/api/v1/users/change-email', {email: emailInput});
+        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-email`, {email: emailInput});
         console.log(response);
       }catch(err) {
         if (axios.isAxiosError(err)) {
@@ -26,7 +26,7 @@ const UpdateUserDetails = () => {
     event.preventDefault();
     if(passwordInput === secondaryPasswordInput){
       try{
-        const response = await axios.patch('/api/v1/users/change-pw', {password: passwordInput});
+        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {password: passwordInput});
         console.log(response);
       }catch(err) {
         console.log(err)
