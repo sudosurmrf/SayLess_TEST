@@ -122,7 +122,6 @@ h3 {
 }
 
 
-
 h4 {
     display: flex;
     align-items: center;
@@ -166,21 +165,48 @@ p {
 
 .login-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    /* width: 50%; */
     margin: auto;
     margin-top: 1%;
+}
+
+.uud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 1%;
+    /* border: solid 3px; */
+    gap: 5px
+}
+
+.uud-pw {
+    /* border: solid purple 5px; */
+}
+
+.uud-pw-button {
+    /* border: solid yellow 5px; */
 }
 
 input {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     border: solid 4px;
     border-radius: 5px;
+}
+
+.update-buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px
 }
 
 button {
@@ -188,8 +214,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
-    margin-top: 15px;
+    /* margin: auto; */
+    /* margin-top: 15px; */
     border: solid black 5px;
     border-radius: 5px;
     height: 3em;
