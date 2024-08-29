@@ -36,7 +36,7 @@ router.post('/register', async(req, res, next) => {
 });
 
 // login
-router.get('/login', async(req, res, next) => {
+router.post('/login', async(req, res, next) => {
   try {
     const { username, password } = req.body;
     const assignedToken = await getUser(username, password);
@@ -68,7 +68,7 @@ router.get('/userdetails', verifyToken, async(req, res, next) => {
 })
 
 // change password
-router.patch('/change-pw'), verifyToken, async (req, res, next) => {
+router.patch('/change-pw', verifyToken, async (req, res, next) => {
   try {
     const { newPassword } = req.body;
     await changePassword(req.user.id, newPassword);
@@ -76,7 +76,7 @@ router.patch('/change-pw'), verifyToken, async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ message: 'Password Change Error', error:err.message});
   };
-};
+});
 
 // change email
 router.patch('/change-email', verifyToken, async (req, res, next) => {
