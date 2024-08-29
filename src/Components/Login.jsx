@@ -13,7 +13,7 @@ const Login = () => {
 
   const logInUser = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, {
         username: usernameInput,
         password: passwordInput,
       });
