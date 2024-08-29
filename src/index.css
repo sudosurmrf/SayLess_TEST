@@ -185,14 +185,6 @@ p {
     gap: 5px
 }
 
-.uud-pw {
-    /* border: solid purple 5px; */
-}
-
-.uud-pw-button {
-    /* border: solid yellow 5px; */
-}
-
 input {
     display: flex;
     align-items: center;
