@@ -33,7 +33,7 @@ const Login = () => {
   const registerUser = async () => {
     if (passwordInput === secondaryPasswordInput) {
       try {
-        const response = await axios.post('/api/v1/users/register', {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/register`, {
           username: usernameInput,
           password: passwordInput,
           email: emailInput,
