@@ -39,7 +39,9 @@ router.post('/register', async(req, res, next) => {
 router.get('/login', async(req, res, next) => {
   try {
     const { username, password } = req.body;
+    console.log('api/users username', username, 'password', password)
     const assignedToken = await getUser(username, password);
+    console.log(`api/users.cjs: assigned token`, assignedToken);
     res.json({ token: assignedToken });
   } catch (error) {
     next(error);
@@ -82,6 +84,7 @@ router.patch('/change-pw'), verifyToken, async (req, res, next) => {
 router.patch('/change-email', verifyToken, async (req, res, next) => {
   try {
     const { newEmail } = req.body;
+    console.log('new email', newEmail);
     await changeEmail(req.user.id, newEmail);
     res.status(200).json({ message: 'Email Change Successful' });
   } catch (err) {
