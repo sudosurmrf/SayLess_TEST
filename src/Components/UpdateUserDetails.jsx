@@ -14,7 +14,11 @@ const UpdateUserDetails = () => {
         const response = await axios.patch('/api/v1/users/change-email', {email: emailInput});
         console.log(response);
       }catch(err) {
-        console.log(err);
+        if (axios.isAxiosError(err)) {
+          console.error('Axios error:', err.response?.data || err.message);
+        } else {
+          console.error('Unexpected error:', err);
+        }
       }
     }
 
@@ -40,7 +44,7 @@ const UpdateUserDetails = () => {
           {/* This line will be implemented with token so the user knows their email. Should ask Jonathan about best practice regarding user account info <h3>Your Current Email is:</h3> */}
           <form className="uud">
           <input type="email" value={emailInput} onChange={(event)=>{setEmailInput(event.target.value)}} placeholder='"Enter New Email' /> <br />
-          <button onClick={() => {changeEmail()}}>Change Email</button>
+          <button onClick={(e) => {e.preventDefault(); changeEmail(e)}}>Change Email</button>
           </form> 
         </>
       :
@@ -49,9 +53,9 @@ const UpdateUserDetails = () => {
 
       {showChangePassword ?
         <form className="uud">
-          <input className="uud-pw" type="password" value={passwordInput} onChange={(event)=>{setPasswordInput(event.target.value)}} placeholder='"Enter New Password' /> <br />
-          <input className="uud-pw" type="password" value={secondaryPasswordInput} onChange={(event)=>{setSecondaryPasswordInput(event.target.value)}} placeholder='"Enter New Password Again' /> <br />
-          <button className="uud-pw-button" onClick={()=>{changePW()}}>Change Password</button>
+          <input type="password" value={passwordInput} onChange={(event)=>{setPasswordInput(event.target.value)}} placeholder='"Enter New Password' /> <br />
+          <input type="password" value={secondaryPasswordInput} onChange={(event)=>{setSecondaryPasswordInput(event.target.value)}} placeholder='"Enter New Password Again' /> <br />
+          <button onClick={()=>{changePW()}}>Change Password</button>
         </form>
       :
         <button onClick={() => {setShowChangePassword(true)}}>Want to change your Password?</button>

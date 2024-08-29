@@ -36,10 +36,12 @@ router.post('/register', async(req, res, next) => {
 });
 
 // login
-router.get('/login', async(req, res, next) => {
+router.post('/login', async(req, res, next) => {
   try {
     const { username, password } = req.body;
+    console.log('api/users username', username, 'password', password)
     const assignedToken = await getUser(username, password);
+    console.log(`api/users.cjs: assigned token`, assignedToken);
     res.json({ token: assignedToken });
   } catch (error) {
     next(error);
@@ -68,7 +70,7 @@ router.get('/userdetails', verifyToken, async(req, res, next) => {
 })
 
 // change password
-router.patch('/change-pw'), verifyToken, async (req, res, next) => {
+router.patch('/change-pw', verifyToken, async (req, res, next) => {
   try {
     const { newPassword } = req.body;
     await changePassword(req.user.id, newPassword);
@@ -76,12 +78,13 @@ router.patch('/change-pw'), verifyToken, async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ message: 'Password Change Error', error:err.message});
   };
-};
+});
 
 // change email
 router.patch('/change-email', verifyToken, async (req, res, next) => {
   try {
     const { newEmail } = req.body;
+    console.log('new email', newEmail);
     await changeEmail(req.user.id, newEmail);
     res.status(200).json({ message: 'Email Change Successful' });
   } catch (err) {
