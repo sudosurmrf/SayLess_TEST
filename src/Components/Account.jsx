@@ -1,22 +1,22 @@
-import React, { useState, useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import UpdateUserDetails from './updateUserDetails';
 import axios from 'axios';
 
 const Account = () => {
-    const [username, setUsername] = useState("");
-    const [gamesWon, setGamesWon] = useState(0);
-    const [gamesLost, setGamesLost] = useState(0);
-    const [gamesPlayed, setGamesPlayed] = useState(0);
-    const [winBadges, setWinBadges] = ([]);
-    const [playBadges, setPlayBadges] = ([]);
-    const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [gamesWon, setGamesWon] = useState(0);
+  const [gamesLost, setGamesLost] = useState(0);
+  const [gamesPlayed, setGamesPlayed] = useState(0);
+  const [winBadges, setWinBadges] = ([]);
+  const [playBadges, setPlayBadges] = ([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-      const getUserData = async () =>{
-        const token = localStorage.getItem('token');
 
-        // double check axios import when pulled
+
+  useEffect(() => {
+    const getUserData = async () =>{
+    const token = localStorage.getItem('token');
         try {
           const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/login`, {
             headers: {
@@ -24,30 +24,36 @@ const Account = () => {
             }
           });
 
-          if(response.ok) {
-            const { data } = response
-            console.log(data)
-
-            // if we were using axios we would deconstruct it so you'd get const { user, customQuotes, userWinBadges, userWlayBadges  } = data
-            setUsername(data.user.username);
-            setGamesWon(data.user.wins)
-            setGamesLost(data.user.losses);
-            // setGamesPlayed() this is going to be more complicated
-            // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
-            // setWinBadges(data.userWinBadges.winBadges);
-            // setPlayBadges(data.userPlayBadges.playBadges);
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
           }
-        } catch (error){
+        });
+        console.log(response.data)
+
+          // if we were using axios we would deconstruct it so you'd get const { user, customQuotes, userWinBadges, userWlayBadges  } = data
+        setUsername(response.data.user);
+        setGamesWon(response.data.user.wins)
+        setGamesLost(response.data.user.losses);
+          // setGamesPlayed() this is going to be more complicated
+          // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
+          // setWinBadges(data.userWinBadges.winBadges);
+          // setPlayBadges(data.userPlayBadges.playBadges);
+        
+      } catch (error){
           console.log('Unable to get data', error)
           // navigate('/Login');
         };   
       }
-    getUserData()
+
+    getUserData();
   },[navigate]);
+
 
   return (
     <>
-      {username? <h1> Welome {username}</h1> : <h1>Getting Your data</h1> } 
+      {username ? <h1> Welome {username}</h1> : <h1>Getting Your data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 
