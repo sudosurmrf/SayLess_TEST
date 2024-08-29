@@ -13,9 +13,16 @@ const Account = () => {
   const navigate = useNavigate();
 
 
+
   useEffect(() => {
     const getUserData = async () =>{
     const token = localStorage.getItem('token');
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/login`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
 
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
@@ -44,11 +51,6 @@ const Account = () => {
   },[navigate]);
 
 
-  const logOut = () => {
-    localStorage.removeItem('token');
-  };
-
-
   return (
     <>
       {username ? <h1> Welome {username}</h1> : <h1>Getting Your data</h1> } 
@@ -71,8 +73,6 @@ const Account = () => {
         </section>
                                        
         <UpdateUserDetails />
-
-        <button onClick={() => {logOut()}}>Log Out</button>
     </>
   )
 }
