@@ -13,7 +13,7 @@ const Login = () => {
 
   const logInUser = async () => {
     try {
-      const response = await axios.get('/api/v1/users/login', {
+      const response = await axios.post('/api/v1/users/login', {
         username: usernameInput,
         password: passwordInput,
       });
