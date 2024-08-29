@@ -8,8 +8,10 @@ const Account = () => {
   const [gamesWon, setGamesWon] = useState(0);
   const [gamesLost, setGamesLost] = useState(0);
   const [gamesPlayed, setGamesPlayed] = useState(0);
+  const [WLRatio, setWLRatio] = useState(0);
   const [winBadges, setWinBadges] = ([]);
   const [playBadges, setPlayBadges] = ([]);
+  const [userQuotes, setUserQuotes] = ([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,10 +28,10 @@ const Account = () => {
           setUsername(response.data.userInfo.username);
           setGamesWon(response.data.userInfo.wins)
           setGamesLost(response.data.userInfo.losses);
-          // setGamesPlayed() this is going to be more complicated
-          // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
-          // setWinBadges(data.userWinBadges.winBadges);
-          // setPlayBadges(data.userPlayBadges.playBadges);
+          setGamesPlayed((gamesWon + gamesLost));
+          setWinBadges(response.data.userWinBadges.winBadges);
+          setPlayBadges(response.data.userPlayBadges.playBadges);
+          setUserQuotes(response.data.customQuotes);
         
         } catch (error){
           console.log('Unable to get data', error)
@@ -57,7 +59,7 @@ const Account = () => {
           {/* <h3>Your Badges:
             <ol>
             { winBadges.map((badge)=> {<li>{badge.name}</li>})}
-              {playBadges.map((badge)=> {<li>{badge.name}</li>})}
+            {playBadges.map((badge)=> {<li>{badge.name}</li>})}
             </ol>
           </h3> */}
         </section>
