@@ -9,9 +9,9 @@ const Account = () => {
   const [gamesLost, setGamesLost] = useState(0);
   const [gamesPlayed, setGamesPlayed] = useState(0);
   const [WLRatio, setWLRatio] = useState(0);
-  const [winBadges, setWinBadges] = ([]);
-  const [playBadges, setPlayBadges] = ([]);
-  const [userQuotes, setUserQuotes] = ([]);
+  const [winBadges, setWinBadges] = useState([]);
+  const [playBadges, setPlayBadges] = useState([]);
+  const [userQuotes, setUserQuotes] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,13 +29,14 @@ const Account = () => {
           setGamesWon(response.data.userInfo.wins)
           setGamesLost(response.data.userInfo.losses);
           setGamesPlayed((gamesWon + gamesLost));
+          setWLRatio((gamesWon / gamesLost).toFixed(2));
           setWinBadges(response.data.userWinBadges.winBadges);
           setPlayBadges(response.data.userPlayBadges.playBadges);
           setUserQuotes(response.data.customQuotes);
         
         } catch (error){
           console.log('Unable to get data', error)
-          // navigate('/Login');
+          navigate('/Login');
         };   
       };
 
@@ -49,19 +50,24 @@ const Account = () => {
 
         <h1>Your Account History</h1> <br /><br />
 
-        <section id="account-user-details"> 
-          <h3 className="account-played">Games Played: {gamesPlayed} </h3>
-            <h3 className="account-won">Games Won: {gamesWon} </h3>
-            <h3 className="account-lost">Games Lost: {gamesLost} </h3>
-            <h3 className="account-ratio">W/L Ratio: {}% </h3>
-           <br /> <br />
+        <section>
 
-          {/* <h3>Your Badges:
-            <ol>
-            { winBadges.map((badge)=> {<li>{badge.name}</li>})}
-            {playBadges.map((badge)=> {<li>{badge.name}</li>})}
-            </ol>
-          </h3> */}
+          <section id="account-user-details"> 
+            <h3 className="account-played">Games Played: {gamesPlayed} </h3>
+              <h3 className="account-won">Games Won: {gamesWon} </h3>
+              <h3 className="account-lost">Games Lost: {gamesLost} </h3>
+              <h3 className="account-ratio">W/L Ratio: {WLRatio}% </h3>
+              <br /> <br />
+          </section>
+
+          <section id="user-badges">
+            <h3>Your Badges:
+              <ol>
+              {winBadges.map((badge)=> <li key="{badge.id}">{badge.name}</li>)}
+              {playBadges.map((badge)=> <li key="{badge.id}">{badge.name}</li>)}
+              </ol>
+            </h3>
+          </section>
         </section>
                                        
         <UpdateUserDetails />
