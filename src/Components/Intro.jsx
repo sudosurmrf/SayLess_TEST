@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Intro = () => {
     return (
@@ -22,7 +23,7 @@ const Intro = () => {
            </ol>
           </h4>
           <input className="intro-demo" placeholder='Demo Vid'></input>
-          <button className="intro-button">Say Less! Let's Play!</button>
+          <button className="intro-button"><a href="/game" ></a>Say Less! Let's Play!</button>
 
 
       </>
