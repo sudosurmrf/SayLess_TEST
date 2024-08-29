@@ -53,6 +53,27 @@ const getUser = async(usernameToTry, passwordToTry) => {
   }
 }
 
+const getUserAcctDetails = async (userId) => {
+  try {  
+    const userDetails = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        id: true,
+        username: true,
+        wins: true,
+        losses: true,
+        avatarId: true,
+      }
+    })
+
+    return userDetails
+  } catch (error){
+    return (`Unable to retrieve user information`, error.message);
+  }
+}
+
 const changeEmail = async(userId, newEmail) => {
   try {
     await prisma.user.update({
@@ -68,4 +89,4 @@ const changeEmail = async(userId, newEmail) => {
   }
 }
 
-module.exports = { createUser, getUser, changeEmail }
+module.exports = { createUser, getUser, changeEmail, getUserAcctDetails }

@@ -71,8 +71,6 @@ const Account = () => {
         </section>
                                        
         <UpdateUserDetails />
-
-        <button onClick={() => {logOut()}}>Log Out</button>
     </>
   )
 }
