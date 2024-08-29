@@ -51,16 +51,16 @@ const Account = () => {
 
   return (
     <>
-      {username? <h1> Welome {username}</h1> : <h1>Getting Your data</h1> } <br /> <br />
+      {username? <h1> Welome {username}</h1> : <h1>Getting Your data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 
         <section id="account-user-details"> 
-          <h3>Games Played: {gamesPlayed} <br />
-            Games Won: {gamesWon} <br />
-            Games Lost: {gamesLost} <br/>
-            W/L Ratio: {}%
-          </h3> <br /> <br />
+          <h3 className="account-played">Games Played: {gamesPlayed} </h3>
+            <h3 className="account-won">Games Won: {gamesWon} </h3>
+            <h3 className="account-lost">Games Lost: {gamesLost} </h3>
+            <h3 className="account-ratio">W/L Ratio: {}% </h3>
+           <br /> <br />
 
           {/* <h3>Your Badges:
             <ol>

@@ -64,7 +64,7 @@ const Login = () => {
         )}
         {showLogin ? (
           <>
-            <button type="button" onClick={logInUser}>Log In</button>
+            <button type="button" className="switch-link" onClick={logInUser}>Log In</button>
             <br /> 
             <button type="button" className="switch-link" onClick={() => setShowLogin(false)}>
               Not a User? Sign up HERE
@@ -72,7 +72,7 @@ const Login = () => {
           </>
         ) : (
           <>
-            <button type="button" onClick={registerUser}>Sign up</button>
+            <button type="button" className="switch-link" onClick={registerUser}>Sign up</button>
             <br /> 
             <button type="button" className="switch-link" onClick={() => setShowLogin(true)}>Already a User? Login</button>
           </>
