@@ -35,9 +35,11 @@ const getUser = async(usernameToTry, passwordToTry) => {
     })
 
     const passwordMatch = await bcrypt.compare(passwordToTry, password);
+    console.log(passwordMatch);
 
     if (username && passwordMatch) {
       const assignedToken = await jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
+      console.log(assignedToken);
       return (assignedToken);
     } else {
       throw new Error('Either username or password do not match our records.')
