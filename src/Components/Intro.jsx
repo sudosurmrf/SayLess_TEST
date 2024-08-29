@@ -17,9 +17,9 @@ const Intro = () => {
            <ol>
             <li>Player One will select a phrase to use.</li>
             <li>Player One will then reduce the phrase by using only a portion of the characters used in the original phrase.</li>
-            <li>Player One will then send the shortend phrase to Player Two to decipher.</li>
-            <li>Player Two must guess the correct phrase in order to win!</li>
-            <li>Players will earn points for each phrase that was solved correctly!</li>
+            <li>Player One will then send the reduced phrase to Player Two to decipher.</li>
+            <li>Player Two must guess the correct phrase in order to win.</li>
+            <li>Players will earn points for each phrase that is solved correctly!</li>
            </ol>
           </h4>
           <input className="intro-demo" placeholder='Demo Vid'></input>
