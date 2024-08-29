@@ -12,44 +12,34 @@ const Account = () => {
   const [playBadges, setPlayBadges] = ([]);
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     const getUserData = async () =>{
-    const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
         try {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/login`, {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
           });
+          console.log(response.data)
 
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        console.log(response.data)
-
-          // if we were using axios we would deconstruct it so you'd get const { user, customQuotes, userWinBadges, userWlayBadges  } = data
-        setUsername(response.data.user);
-        setGamesWon(response.data.user.wins)
-        setGamesLost(response.data.user.losses);
+          setUsername(response.data.userInfo.username);
+          setGamesWon(response.data.userInfo.wins)
+          setGamesLost(response.data.userInfo.losses);
           // setGamesPlayed() this is going to be more complicated
           // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
           // setWinBadges(data.userWinBadges.winBadges);
           // setPlayBadges(data.userPlayBadges.playBadges);
         
-      } catch (error){
+        } catch (error){
           console.log('Unable to get data', error)
           // navigate('/Login');
         };   
-      }
+      };
 
     getUserData();
   },[navigate]);
-
+  
 
   return (
     <>
