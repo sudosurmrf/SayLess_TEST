@@ -71,7 +71,7 @@ router.get('/userdetails', verifyToken, async(req, res, next) => {
 router.patch('/change-pw', verifyToken, async (req, res, next) => {
   try {
     const { newPassword } = req.body;
-    await changePassword(req.user.id, newPassword);
+    await changePassword(req.user.userId, newPassword);
     res.status(200).json({ message: 'Password Change Successful'});
   } catch (err) {
     res.status(500).json({ message: 'Password Change Error', error:err.message});
@@ -82,12 +82,11 @@ router.patch('/change-pw', verifyToken, async (req, res, next) => {
 router.patch('/change-email', verifyToken, async (req, res, next) => {
   try {
     const { newEmail } = req.body;
-    await changeEmail(req.user.id, newEmail);
+    await changeEmail(req.user.userId, newEmail);
     res.status(200).json({ message: 'Email Change Successful' });
   } catch (err) {
     res.status(500).json({ message: 'Email Change Failed', error: err.message });
   }
 });
-
 
 module.exports = router;

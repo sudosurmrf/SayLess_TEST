@@ -11,8 +11,15 @@ const UpdateUserDetails = () => {
   const changeEmail = async(event) => {
     event.preventDefault();
       try{
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-email`, {email: emailInput});
-        console.log(response);
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: { Authorization: `Bearer ${token}` }
+        };
+        
+        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-email`, {newEmail: emailInput},
+        config
+        );
+        console.log(response.data);
       }catch(err) {
         if (axios.isAxiosError(err)) {
           console.error('Axios error:', err.response?.data || err.message);
