@@ -13,11 +13,12 @@ const Login = () => {
 
   const logInUser = async () => {
     try {
-      const response = await axios.post('/api/v1/users/login', {
+
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, {
         username: usernameInput,
         password: passwordInput,
       });
-          
+      console.log(`log in response`, response);   
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token); 
         navigate('/account')

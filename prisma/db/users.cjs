@@ -42,7 +42,9 @@ const getUser = async(usernameToTry, passwordToTry) => {
 
     if (passwordMatch) {
       const assignedToken = jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
+      console.log(assignedToken);
       return assignedToken
+
     } else {
       throw new Error('Could not assign token.')
     }
