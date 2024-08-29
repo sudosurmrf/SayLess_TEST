@@ -37,7 +37,8 @@ const UpdateUserDetails = () => {
   }
 
   return (
-    <>
+    <div className="update-buttons">
+      
       {showChangeEmail ?
         <>
           {/* This line will be implemented with token so the user knows their email. Should ask Jonathan about best practice regarding user account info <h3>Your Current Email is:</h3> */}
@@ -59,7 +60,7 @@ const UpdateUserDetails = () => {
       :
         <button onClick={() => {setShowChangePassword(true)}}>Want to change your Password?</button>
       }
-    </>
+    </div>
   )
 }
 
