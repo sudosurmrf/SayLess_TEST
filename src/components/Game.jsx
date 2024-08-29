@@ -18,22 +18,38 @@ const Game = () => {
   const [showPlayerOneWait, setShowPlayerOneWait] = useState(false);
   const [showGameResult, setShowGameResult] = useState(false);
 
+  const [seconds, setSeconds] = useState(0);
+
   const [playerOneInput, setPlayerOneInput] = useState("");
   const [playerTwoInput, setPlayerTwoInput] = useState("");
   const [winOrLose, setWinOrLose] = useState("");
 
-  useEffect(()=>{
+  useEffect(()=> {
     setAllQuotes(famousQuotes)
     setQuote(getRandomQuote(allQuotes));
+  },[allQuotes])
 
+  useEffect(() =>{
+    if (seconds <= 0) return;
+
+    const intervalId = setInterval(() =>{
+      setSeconds(prevSeconds => Math.max(prevSeconds - 1, 0))
+    }, 1000);
+
+    return (()=>{clearInterval(intervalId)});
+  },[seconds])
+
+  useEffect(()=>{
     socket.on("p1start", () => {
       setShowLobby(false);
       setShowPlayerOneTurn(true);
+      setSeconds(60);
     });
 
     socket.on("p2wait", () => {
       setShowLobby(false);
       setShowPlayerTwoWait(true);
+      setSeconds(60);
     });
 
     socket.on("p2start", ({ data }) => {
@@ -42,12 +58,14 @@ const Game = () => {
       setShowPlayerOneTurn(false);
       setShowPlayerTwoWait(false);
       setShowPlayerTwoTurn(true);
+      setSeconds(60);
     });
 
     socket.on("p1wait", () => {
       setShowPlayerOneTurn(false);
       setShowPlayerTwoWait(false);
       setShowPlayerOneWait(true);
+      setSeconds(60);
     });
 
     socket.on("p2won", ({ data }) =>{
@@ -78,7 +96,10 @@ const Game = () => {
       setShowGameResult(false);
     });
 
-  },[allQuotes])
+    return (() => {
+      socket.off('disconnect')
+    });
+  },[])
 
   const countWordsEasy = (text) => {
     let noVowels = text.replace(/[aeiou]/g,'');
@@ -143,6 +164,7 @@ const Game = () => {
       { showPlayerOneTurn ?
         <>
           <h2> Player 1 Turn: {quote} </h2>
+          <h2> Time Remaining: {seconds}</h2>
           <button className="game-quote" onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
           <button onClick={() => {setMaxEasy()}} type="button">Easy Difficulty</button>
           <button onClick={() => {setMaxIntermediate()}} type="button">Intermediate Difficulty</button>
@@ -159,6 +181,7 @@ const Game = () => {
       { showPlayerTwoWait ?
         <>
           <h2> Its Player One's Turn, Please Wait Patiently </h2>
+          <h2> Time Remaining: {seconds}</h2>
         </>
         :
         <></>
@@ -167,6 +190,7 @@ const Game = () => {
       { showPlayerTwoTurn ?
         <>
           <h2> Player 2 Turn: {playerOneInput} </h2>
+          <h2> Time Remaining: {seconds}</h2>
             <form>
               <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
               <button onClick={() => {playerTwoTurnOver()}} type="button"> Submit Your Guess</button>
@@ -179,6 +203,7 @@ const Game = () => {
       { showPlayerOneWait ?
         <>
           <h2> Its Player Two's Turn, Please Wait Patiently </h2>
+          <h2> Time Remaining: {seconds}</h2>
         </>
         :
         <></>
