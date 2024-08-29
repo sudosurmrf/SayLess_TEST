@@ -45,6 +45,7 @@ const Game = () => {
       setShowLobby(false);
       setShowPlayerOneTurn(true);
       setSeconds(60);
+      setTimeout(playerOneTurnOver, 60000);
     });
 
     socket.on("p2wait", () => {
@@ -60,6 +61,7 @@ const Game = () => {
       setShowPlayerTwoWait(false);
       setShowPlayerTwoTurn(true);
       setSeconds(60);
+      setTimeout(playerTwoTurnOver, 60000);
     });
 
     socket.on("p1wait", () => {
