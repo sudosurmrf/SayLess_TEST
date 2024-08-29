@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Intro = () => {
     return (
@@ -23,8 +23,11 @@ const Intro = () => {
            </ol>
           </h4>
           <input className="intro-demo" placeholder='Demo Vid'></input>
-          <button className="intro-button">Say Less! Let's Play!</button>
-
+          
+              <Link to="/game">
+                <button className="intro-button">Say Less! Let's Play!</button>
+              </Link>
+         
 
       </>
 
