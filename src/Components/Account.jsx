@@ -18,7 +18,7 @@ const Account = () => {
 
         // double check axios import when pulled
         try {
-          const response = await axios.get('/api/v1/users/userdetails', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/login`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
