@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const { createUser, getUser, changePassword, changeEmail } = require('../prisma/db/users.cjs')
+const { createUser, getUser, changePassword, changeEmail, getUserAcctDetails } = require('../prisma/db/users.cjs')
 const { getCustomQuotes } = require('../prisma/db/quotes.cjs');
 const { getWinBadges, getPlayBadges } = require('../prisma/db/users-badges.cjs');
 
@@ -39,9 +39,7 @@ router.post('/register', async(req, res, next) => {
 router.post('/login', async(req, res, next) => {
   try {
     const { username, password } = req.body;
-    console.log('api/users username', username, 'password', password)
     const assignedToken = await getUser(username, password);
-    console.log(`api/users.cjs: assigned token`, assignedToken);
     res.json({ token: assignedToken });
   } catch (error) {
     next(error);
@@ -51,13 +49,13 @@ router.post('/login', async(req, res, next) => {
 // account page info
 router.get('/userdetails', verifyToken, async(req, res, next) => {
   try {
-    const user = req.user.username
+    const userInfo = await getUserAcctDetails(req.user.userId)
     const customQuotes = await getCustomQuotes(req.user.userId);
     const userWinBadges = await getWinBadges(req.user.userId);
     const userPlayBadges = await getPlayBadges(req.user.userId);
     
     const accountInfo = {
-      user,
+      userInfo,
       customQuotes,
       userWinBadges,
       userPlayBadges
@@ -84,7 +82,6 @@ router.patch('/change-pw', verifyToken, async (req, res, next) => {
 router.patch('/change-email', verifyToken, async (req, res, next) => {
   try {
     const { newEmail } = req.body;
-    console.log('new email', newEmail);
     await changeEmail(req.user.id, newEmail);
     res.status(200).json({ message: 'Email Change Successful' });
   } catch (err) {
