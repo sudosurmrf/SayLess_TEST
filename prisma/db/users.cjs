@@ -34,15 +34,19 @@ const getUser = async(usernameToTry, passwordToTry) => {
       }
     })
 
-    const passwordMatch = await bcrypt.compare(passwordToTry, password);
-    console.log(passwordMatch);
+    if (!username){
+      throw new Error ('Username not found.')
+    }
 
-    if (username && passwordMatch) {
-      const assignedToken = await jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
+    const passwordMatch = await bcrypt.compare(passwordToTry, password);
+
+    if (passwordMatch) {
+      const assignedToken = jwt.sign({ userId: id, username: username }, process.env.JWT_SECRET);
       console.log(assignedToken);
-      return (assignedToken);
+      return assignedToken
+
     } else {
-      throw new Error('Either username or password do not match our records.')
+      throw new Error('Could not assign token.')
     }
   } catch (error) {
     return 'Either username or password do not match our records.';
