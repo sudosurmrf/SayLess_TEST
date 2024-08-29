@@ -25,10 +25,9 @@ const Account = () => {
         });
         console.log(response.data)
 
-          // if we were using axios we would deconstruct it so you'd get const { user, customQuotes, userWinBadges, userWlayBadges  } = data
-        setUsername(response.data.user);
-        setGamesWon(response.data.user.wins)
-        setGamesLost(response.data.user.losses);
+        setUsername(response.data.userInfo.username);
+        setGamesWon(response.data.userInfo.wins)
+        setGamesLost(response.data.userInfo.losses);
           // setGamesPlayed() this is going to be more complicated
           // not tracking custom quotes yet but I'll leave this here data.customQuotes[0].text
           // setWinBadges(data.userWinBadges.winBadges);
@@ -42,11 +41,6 @@ const Account = () => {
 
     getUserData();
   },[navigate]);
-
-
-  const logOut = () => {
-    localStorage.removeItem('token');
-  };
 
 
   return (
