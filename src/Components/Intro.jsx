@@ -23,7 +23,7 @@ const Intro = () => {
            </ol>
           </h4>
           <input className="intro-demo" placeholder='Demo Vid'></input>
-          <button className="intro-button"><ButtonLink route={'/game'}></ButtonLink>"Say Less! Let's Play!</button>
+          <button className="intro-button">Say Less! Let's Play!</button>
 
 
       </>
