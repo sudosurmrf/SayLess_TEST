@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getRandomQuote, famousQuotes } from './Quotes.jsx';
 import io from 'socket.io-client';
+import axios from 'axios';
 
 // TODO need to adjust where this connects to later likely
 const socket = io.connect("http://localhost:3001");
@@ -74,6 +75,7 @@ const Game = () => {
       setShowPlayerTwoTurn(false);
       setShowPlayerOneWait(false);
       setShowGameResult(true);
+      playerUpdate('win');
     });
 
     socket.on("p2lose", ({ data }) =>{
@@ -81,7 +83,8 @@ const Game = () => {
       setShowPlayerTwoTurn(false);
       setShowPlayerOneWait(false);
       setShowGameResult(true);
-      setWinOrLose('Sorry, better luck next time.')
+      setWinOrLose('Sorry, better luck next time.');
+      playerUpdate('lose');
     });
 
     socket.on("backtolobby", () => {
@@ -142,7 +145,24 @@ const Game = () => {
     } else {
       socket.emit("p2sendlose", { playerTwoInput });
     }
-    // this will need to do an API call besides the usual socket stuff to update the user table for win or loss
+  };
+
+  const playerUpdate = async (winLose) =>{
+    const token = localStorage.getItem('token');
+      if ((token !== undefined)){
+        try{
+          const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/player-${winLose}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (response.ok){
+            console.log('User record updated.');
+          }
+        } catch (error) {
+          throw new error('No account, anonymous player.');
+        };
+      };
   };
 
   const playAgain = () => {
