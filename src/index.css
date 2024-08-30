@@ -154,7 +154,7 @@ p {
     border: solid black 5px;
     border-radius: 5px;
     height: 3em;
-    width: 15%;
+    width: auto;
     color: white;
     font-family: 'Trebuchet MS', sans-serif; 
 }
