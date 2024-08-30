@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 const Intro = () => {
     return (
       <>
-      
         <div className="header">
-         <h1>SayLess</h1>
+         <img src="images/logo-blue.png"></img>
         </div>
 
         <h2 className="motto">The fun phrase game you will be itching to play!</h2>
@@ -23,6 +22,7 @@ const Intro = () => {
            </ol>
           </h4>
           <input className="intro-demo" placeholder='Demo Vid'></input>
+          
           
               <Link to="/game">
                 <button className="intro-button">Say Less! Let's Play!</button>
