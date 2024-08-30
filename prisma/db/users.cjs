@@ -89,6 +89,21 @@ const changeEmail = async(userId, newEmail) => {
   }
 }
 
+const changePassword = async(userId, newPassword) => {
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        password: newPassword
+      }
+    })
+  } catch (error) {
+    return (`Couldn't change password`, error.message);
+  }
+}
+
 const userWin = async(userId) => {
   try {
     await prisma.user.update({
@@ -125,4 +140,4 @@ const userLose = async(userId) => {
   }
 }
 
-module.exports = { createUser, getUser, changeEmail, getUserAcctDetails, userWin, userLose }
+module.exports = { createUser, getUser, changeEmail, changePassword, getUserAcctDetails, userWin, userLose }
