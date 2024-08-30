@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { selectAvatar, avatarArray } from './Avatars.jsx';
+import { selectAvatar } from './Avatars.jsx';
+import { selectBadges, winBadgesArray, playBadgesArray } from './Badges.jsx';
 import UpdateUserDetails from './updateUserDetails';
 import axios from 'axios';
 
@@ -10,8 +11,8 @@ const Account = () => {
   const [gamesLost, setGamesLost] = useState(0);
   const [gamesPlayed, setGamesPlayed] = useState(0);
   const [WLRatio, setWLRatio] = useState(0);
-  const [winBadges, setWinBadges] = useState([]);
-  const [playBadges, setPlayBadges] = useState([]);
+  const [userWinBadgesInfo, setUserWinBadgesInfo] = useState([]);
+  const [userPlayBadgesInfo, setUserPlayBadgesInfo] = useState([]);
   const [userAvatarId, setUserAvatarId] = useState(0);
   const [avatar, setAvatar] = useState("");
   const [userQuotes, setUserQuotes] = useState([]);
@@ -26,15 +27,14 @@ const Account = () => {
               'Authorization': `Bearer ${token}`
             }
           });
-          console.log(response.data)
 
           setUsername(response.data.userInfo.username);
           setGamesWon(response.data.userInfo.wins)
           setGamesLost(response.data.userInfo.losses);
           setGamesPlayed((gamesWon + gamesLost));
           setWLRatio((gamesWon / gamesLost).toFixed(2));
-          setWinBadges(response.data.userWinBadges.winBadges);
-          setPlayBadges(response.data.userPlayBadges.playBadges);
+          setUserWinBadgesInfo(response.data.userWinBadges.winBadges);
+          setUserPlayBadgesInfo(response.data.userPlayBadges.playBadges);
           setUserAvatarId(response.data.userInfo.avatarId)
           setUserQuotes(response.data.customQuotes);
         
@@ -50,7 +50,6 @@ const Account = () => {
   useEffect(()=>{
     setAvatar(selectAvatar(userAvatarId));
   },[userAvatarId])
-  
 
   return (
     <>
@@ -70,10 +69,8 @@ const Account = () => {
 
           <section id="user-badges">
             <h3>Your Badges:
-              <ol>
-              {winBadges.map((badge)=> <li key="{badge.id}">{badge.name}</li>)}
-              {playBadges.map((badge)=> <li key="{badge.id}">{badge.name}</li>)}
-              </ol>
+              <ul>{selectBadges(winBadgesArray,userWinBadgesInfo).map((badge)=>{<li>{badge}</li>})}</ul>
+              {/* <ul>{selectBadges(playBadgesArray,userPlayBadgesInfo).map((badge)=>{<li>{badge}</li>})}</ul> */}
             </h3>
           </section>
         </section>

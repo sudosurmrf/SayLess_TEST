@@ -363,3 +363,8 @@ button:hover {
     width: 2.5rem;
     height: 2.5rem
 }
+
+.user-badge-image{
+    width: 10rem;
+    height: 10rem
+}
