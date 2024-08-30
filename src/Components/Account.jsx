@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { selectAvatar, avatarArray } from './Avatars.jsx';
 import UpdateUserDetails from './updateUserDetails';
 import axios from 'axios';
 
@@ -11,6 +12,9 @@ const Account = () => {
   const [WLRatio, setWLRatio] = useState(0);
   const [winBadges, setWinBadges] = useState([]);
   const [playBadges, setPlayBadges] = useState([]);
+  const [avatarIcons, setAvatarIcons] = useState([]);
+  const [userAvatarId, setUserAvatarId] = useState(0);
+  const [avatar, setAvatar] = useState("");
   const [userQuotes, setUserQuotes] = useState([]);
   const navigate = useNavigate();
 
@@ -32,6 +36,7 @@ const Account = () => {
           setWLRatio((gamesWon / gamesLost).toFixed(2));
           setWinBadges(response.data.userWinBadges.winBadges);
           setPlayBadges(response.data.userPlayBadges.playBadges);
+          setUserAvatarId(response.data.userInfo.avatarId)
           setUserQuotes(response.data.customQuotes);
         
         } catch (error){
@@ -42,11 +47,16 @@ const Account = () => {
 
     getUserData();
   },[navigate]);
+
+  useEffect(()=>{
+    setAvatarIcons(avatarArray);
+    setAvatar(selectAvatar(userAvatarId));
+  },[userAvatarId])
   
 
   return (
     <>
-      {username ? <h1> Welome {username}</h1> : <h1>Getting Your data</h1> } 
+      {username ? <h1> Welome {username} {avatar}</h1>  : <h1>Getting Your data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 
