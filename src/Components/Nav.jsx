@@ -33,7 +33,7 @@ const Nav = () => {
             token?
 							<>
             		<li><a href="/account">My Account</a></li>
-								<button onClick={logOut}>Log Out</button>
+								<button className="nav-button" onClick={logOut}>Log Out</button>
 							</>
             	:
               <li><a href="/login">Login</a></li>
