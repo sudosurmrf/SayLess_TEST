@@ -53,5 +53,5 @@ io.on('connection', (socket) =>{
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log(`listening on port ${PORT}`)});
 
-// TODO need to adj;ust to not be hard coded later probably
-server.listen(3001, () => {console.log(`listening on 3001`)});
+const socket = process.env.SOCKET_PORT || 3001;
+server.listen(socket, () => {console.log(`listening on ${socket}`)});
