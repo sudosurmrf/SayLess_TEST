@@ -91,12 +91,14 @@ const changeEmail = async(userId, newEmail) => {
 
 const changePassword = async(userId, newPassword) => {
   try {
+    const encryptedPassword = await bcrypt.hash(newPassword, 5);
+    
     await prisma.user.update({
       where: {
         id: userId
       },
       data: {
-        password: newPassword
+        password: encryptedPassword
       }
     })
   } catch (error) {
