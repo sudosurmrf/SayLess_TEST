@@ -12,7 +12,6 @@ const Account = () => {
   const [WLRatio, setWLRatio] = useState(0);
   const [winBadges, setWinBadges] = useState([]);
   const [playBadges, setPlayBadges] = useState([]);
-  const [avatarIcons, setAvatarIcons] = useState([]);
   const [userAvatarId, setUserAvatarId] = useState(0);
   const [avatar, setAvatar] = useState("");
   const [userQuotes, setUserQuotes] = useState([]);
@@ -49,7 +48,6 @@ const Account = () => {
   },[navigate]);
 
   useEffect(()=>{
-    setAvatarIcons(avatarArray);
     setAvatar(selectAvatar(userAvatarId));
   },[userAvatarId])
   
