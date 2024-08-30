@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import axios from 'axios';
 
 // TODO need to adjust where this connects to later likely
-const socket = io.connect("https://localhost:3001");
+const socket = io.connect("http://localhost:3001");
 
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
