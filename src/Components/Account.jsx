@@ -70,10 +70,10 @@ const Account = () => {
 
           <section id="user-badges">
             <h3>Your Badges:
-              <ol>
-              {winBadges.map((winbadge)=> <li key={winbadge.id}>{winbadge.name}</li>)}
-              {playBadges.map((playbadge)=> <li key={playbadge.id}>{playbadge.name}</li>)}
-              </ol>
+              <ul>
+              {winBadges.map((badge)=> <li key={badge.id}>{badge.name}</li>)}
+              {playBadges.map((badge)=> <li key={badge.id}>{badge.name}</li>)}
+              </ul>
             </h3>
           </section>
         </section>
