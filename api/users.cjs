@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const { createUser, getUser, changePassword, changeEmail, getUserAcctDetails } = require('../prisma/db/users.cjs')
+const { createUser, getUser, changePassword, changeEmail, getUserAcctDetails, userWin, userLose } = require('../prisma/db/users.cjs')
 const { getCustomQuotes } = require('../prisma/db/quotes.cjs');
 const { getWinBadges, getPlayBadges } = require('../prisma/db/users-badges.cjs');
 
@@ -88,5 +88,25 @@ router.patch('/change-email', verifyToken, async (req, res, next) => {
     res.status(500).json({ message: 'Email Change Failed', error: err.message });
   }
 });
+
+// add win
+router.patch('/player-win', verifyToken, async (req, res, next) => {
+  try {
+    await userWin(req.user.userId);
+    res.status(200).json({ message: 'Win added to stats' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//add loss
+router.patch('/player-lose', verifyToken, async (req, res, next) => {
+  try {
+    await userLose(req.user.userId);
+    res.status(200).json({ message: 'Loss added to stats' });
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;

@@ -89,4 +89,40 @@ const changeEmail = async(userId, newEmail) => {
   }
 }
 
-module.exports = { createUser, getUser, changeEmail, getUserAcctDetails }
+const userWin = async(userId) => {
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        wins: {
+          increment: 1
+        }
+      }
+    })
+  } catch (error) {
+    console.error('Error updating user win:', error);
+    throw error;
+  }
+}
+
+const userLose = async(userId) => {
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        losses: {
+          increment: 1
+        }
+      }
+    })
+  } catch (error) {
+    console.error('Error updating user win:', error);
+    throw error;
+  }
+}
+
+module.exports = { createUser, getUser, changeEmail, getUserAcctDetails, userWin, userLose }
