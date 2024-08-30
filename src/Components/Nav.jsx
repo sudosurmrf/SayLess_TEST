@@ -22,7 +22,7 @@ const Nav = () => {
     <>
       <nav className="navbar">
         <a href="/" className="navbar-brand">
-          {/* <img src={homeImage} alt="Home Image" /> */}
+          <img src="images/icon.png" alt="SayLess logo with smiling mouth"></img>
         </a>
         <ul className="nav-links">
           <li><a href="/">Home</a></li>
