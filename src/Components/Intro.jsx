@@ -9,7 +9,7 @@ const Intro = () => {
         </div>
 
         <h2 className="motto">The fun phrase game you will be itching to play!</h2>
-        <h3 clssName="intro-premise">SayLess is a game where your opponent attempts to guess an entire phrase correctly using only a portion of the characters used in the original phrase.</h3>
+        <h3 className="intro-premise">SayLess is a game where your opponent attempts to guess an entire phrase correctly using only a portion of the characters used in the original phrase.</h3>
         
         <h2 className="rules">Rules</h2>
           <h4>

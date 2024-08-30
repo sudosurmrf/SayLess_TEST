@@ -55,8 +55,10 @@ const Login = () => {
       <div className="login-container">
         <h1>{showLogin ? 'Login Page' : 'Register Page'}</h1>
         <form>
+          <div className="login-input">
           <input value={usernameInput} onChange={(event) => setUsernameInput(event.target.value)} type="text" placeholder="username" required /> <br />
-          <input value={passwordInput} onChange={(event) => setPasswordInput(event.target.value)} type="password" placeholder="password" required /> <br />
+          <input value={passwordInput} onChange={(event) => setPasswordInput(event.target.value)} type="password" placeholder="password" required /> <br /></div>
+          
         {!showLogin && ( 
           <>
             <input value={secondaryPasswordInput} onChange={(event) => setSecondaryPasswordInput(event.target.value)} type="password" placeholder="Confirm password" required /> 
@@ -65,7 +67,6 @@ const Login = () => {
         )}
         {showLogin ? (
           <>
-            <div> </div>
             <button type="button" className="switch-link" onClick={logInUser}>Log In</button>
             <br /> 
             <button type="button" className="switch-link" onClick={() => setShowLogin(false)}>Not a User? Sign up HERE</button>
