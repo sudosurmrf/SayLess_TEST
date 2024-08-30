@@ -30,13 +30,23 @@ const UpdateUserDetails = () => {
     }
 
   const changePW = async(event) => {
-    event.preventDefault();
     if(passwordInput === secondaryPasswordInput){
       try{
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {password: passwordInput});
-        console.log(response);
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: { Authorization: `Bearer ${token}` }
+        };
+        
+        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {newPassword: passwordInput},
+        config  
+        );
+        console.log(response.data);
       }catch(err) {
-        console.log(err)
+        if (axios.isAxiosError(err)) {
+          console.error('Axios error:', err.response?.data || err.message);
+        } else {
+          console.error('Unexpected error:', err);
+        }
       }
     } else{
       alert('Passwords do not match, Please try again!');
@@ -62,7 +72,7 @@ const UpdateUserDetails = () => {
         <form className="uud">
           <input type="password" value={passwordInput} onChange={(event)=>{setPasswordInput(event.target.value)}} placeholder='"Enter New Password' /> <br />
           <input type="password" value={secondaryPasswordInput} onChange={(event)=>{setSecondaryPasswordInput(event.target.value)}} placeholder='"Enter New Password Again' /> <br />
-          <button onClick={()=>{changePW()}}>Change Password</button>
+          <button onClick={(e)=>{changePW(e)}}>Change Password</button>
         </form>
       :
         <button onClick={() => {setShowChangePassword(true)}}>Want to change your Password?</button>
