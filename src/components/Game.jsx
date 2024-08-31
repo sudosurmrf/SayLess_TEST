@@ -188,12 +188,14 @@ const Game = () => {
           <h2> Player 1 Turn: {quote} </h2>
           <h2> Time Remaining: {seconds}</h2>
           <button className="game-quote" onClick={() => {setQuote(getRandomQuote(allQuotes))}} type="button">Give me a Better Quote!</button> <br />
-          <button onClick={() => {setMaxEasy()}} type="button">Easy Difficulty</button>
-          <button onClick={() => {setMaxIntermediate()}} type="button">Intermediate Difficulty</button>
-          <button onClick={() => {setMaxExtreme()}} type="button">Extreme Difficulty</button> <br />
+          <div className="game-difficulty-wrap">
+            <button className="game-difficulty" onClick={() => {setMaxEasy()}} type="button">Easy Difficulty</button>
+            <button className="game-difficulty" onClick={() => {setMaxIntermediate()}} type="button">Intermediate Difficulty</button>
+            <button className="game-difficulty" onClick={() => {setMaxExtreme()}} type="button">Extreme Difficulty</button> <br />
+          </div>
           <form>
-            <input value={playerOneInput} minLength="2" maxLength={maxLengthVariable} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
-            <button className="game-shortening" onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortening</button>
+            <input className="game-input" value={playerOneInput} minLength="2" maxLength={maxLengthVariable} onChange={(event) => setPlayerOneInput(event.target.value)} type="text" placeholder="Shorten The Quote Here" required /> <br />
+            <button className="game-shortening" onClick={() => {playerOneTurnOver()}} type="button">Submit Your Shortend Phrase</button>
           </form>
         </>
         :
@@ -214,8 +216,8 @@ const Game = () => {
           <h2> Player 2 Turn: {playerOneInput} </h2>
           <h2> Time Remaining: {seconds}</h2>
             <form>
-              <input value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
-              <button onClick={() => {playerTwoTurnOver()}} type="button"> Submit Your Guess</button>
+              <input className="game-input" value={playerTwoInput} onChange={(event) => setPlayerTwoInput(event.target.value)} type="text" placeholder="Guess the Original Quote" required /> <br />
+              <button className="game-shortening" onClick={() => {playerTwoTurnOver()}} type="button"> Submit Your Guess</button>
             </form>
         </>
         :
@@ -238,7 +240,7 @@ const Game = () => {
                 Player 2 guessed `{playerTwoInput}`. <br />
               {winOrLose}
           </h3> <br />
-          <button onClick={() => {playAgain()}} type="button">Play Again?</button>
+          <button className="game-p1" onClick={() => {playAgain()}} type="button">Play Again?</button>
         </>
         : 
         <></>
