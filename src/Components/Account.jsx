@@ -52,7 +52,6 @@ const Account = () => {
   },[userAvatarId])
 
   const wBadges = selectBadges(winBadgesArray,userWinBadgesInfo)
-  console.log(wBadges);
   const pBadges = selectBadges(playBadgesArray,userPlayBadgesInfo)
 
   return (
@@ -75,15 +74,14 @@ const Account = () => {
             <h3>Your Badges:
               <ul>
                 {wBadges.map((badge)=>{
-                  <li key={badge.id}>
+                  return <li key={badge.id}>
                     <img className={badge.className} src={badge.image} alt={badge.alt}/>
                   </li>})}
                 {pBadges.map((badge)=>{
-                  <li key={badge.id}>
+                  return <li key={badge.id}>
                     <img className={badge.className} src={badge.image} alt={badge.alt}/>
                   </li>})}
                 </ul>
-                <img className={wBadges[0].className} src={wBadges[0].image} alt={wBadges[0].alt} />
             </h3>
           </section>
         </section>
