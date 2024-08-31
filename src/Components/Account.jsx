@@ -83,7 +83,7 @@ const Account = () => {
                     <img className={badge.className} src={badge.image} alt={badge.alt}/>
                   </li>})}
                 </ul>
-                <img src={wBadges[0].image}/>
+                <img className={wBadges[0].className} src={wBadges[0].image} alt={wBadges[0].alt} />
             </h3>
           </section>
         </section>
