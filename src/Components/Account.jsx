@@ -54,11 +54,10 @@ const Account = () => {
   const wBadges = selectBadges(winBadgesArray,userWinBadgesInfo)
   console.log(wBadges);
   const pBadges = selectBadges(playBadgesArray,userPlayBadgesInfo)
-  console.log(pBadges);
 
   return (
     <>
-      {username ? <h1> Welome {username} {avatar}</h1>  : <h1>Getting Your data</h1> } 
+      {username ? <h1> Welome {username} {<img className={avatar.className} src={avatar.image}/>}</h1>  : <h1>Getting Your data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 
@@ -75,9 +74,16 @@ const Account = () => {
           <section id="user-badges">
             <h3>Your Badges:
               <ul>
-                <>{wBadges.map((badge)=>{<li>{badge.image}</li>})}</>
-                <>{pBadges.map((badge)=>{<li>{badge.image}</li>})}</>
-              </ul>
+                {wBadges.map((badge)=>{
+                  <li key={badge.id}>
+                    <img className={badge.className} src={badge.image} alt={badge.alt}/>
+                  </li>})}
+                {pBadges.map((badge)=>{
+                  <li key={badge.id}>
+                    <img className={badge.className} src={badge.image} alt={badge.alt}/>
+                  </li>})}
+                </ul>
+                <img src={wBadges[0].image}/>
             </h3>
           </section>
         </section>
