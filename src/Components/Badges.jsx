@@ -1,9 +1,10 @@
 export const selectBadges = (badgesArray,idArray) => {
-  const allImagesArray = [];
+  const selectedImages = [];
   for (let i = 0; i < idArray.length - 1; i++){
-    allImagesArray.push(badgesArray[(idArray[i].id)].image)
+    const badgeIndex = idArray[i].id
+    selectedImages.push(badgesArray[badgeIndex])
   }
-  return allImagesArray
+  return selectedImages
 }
 
 export const winBadgesArray = [
