@@ -54,7 +54,7 @@ const Account = () => {
 
   return (
     <>
-      {username ? <h1> Welome {username} {avatar}</h1>  : <h1>Getting Your data</h1> } 
+      {username ? <h1> Welcome {username} {avatar}</h1>  : <h1>Getting Your data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 
