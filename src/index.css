@@ -370,6 +370,10 @@ img {
     height: 2.5rem
 }
 
+.user-badge-image{
+    width: 5rem;
+    height: 5rem
+}
 
 button {
   background-color: red;
