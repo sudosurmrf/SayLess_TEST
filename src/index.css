@@ -271,18 +271,18 @@ input {
     display: flex;
     flex-wrap: wrap;
     font-size: x-large;
-    border: solid black 5px;
     width: 30%;
-    /* padding: 10px; */
-    /* margin-top: 5%; */
     margin-left: 5%;
-    background-color: white;
-    /* color: #fff; */
+    /* padding: 2%; */
+    background-color: #7EE8FA;
     border-radius: 8px;
+}
+ul {
+    list-style-type: none;
 }
 .account-played {
     background-color: #FFF07C;
-    border-bottom: solid 5px;
+    border: solid 5px;
     width: 100%;
 }
 .account-played:hover {
@@ -290,7 +290,7 @@ input {
 }
 .account-won {
     background-color: #32CD32;
-    border-bottom: solid 5px;
+    border: solid 5px;
     width: 100%;
 }
 .account-won:hover {
@@ -298,27 +298,28 @@ input {
 }
 .account-lost {
     background-color: red;
-    border-bottom: solid 5px;
+    border: solid 5px;
     width: 100%;
 }
 .account-lost:hover {
     font-size: larger;
 }   
 .account-ratio {
-    background-color: #7EE8FA;
-    border-top: solid 5px;
+    background-color: white;
+    border: solid 5px;
     width: 100%;
 }
 .account-ratio:hover {
     font-size: larger;
 }
-
+img {
+    border-radius: 50%;
+}
 
 .footer {
     position: absolute;
     background-color: #32CD32; 
     color: white; 
-    /* padding: 1rem; */
     width: 100%;
     margin-top: 20%;
 }

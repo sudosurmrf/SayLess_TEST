@@ -56,7 +56,8 @@ const Account = () => {
 
   return (
     <>
-      {username ? <h1> Welome {username} {<img className={avatar.className} src={avatar.image}/>}</h1>  : <h1>Getting Your data</h1> } 
+
+      {username ? <h1> Welcome {username} {<img className={avatar.className} src={avatar.image}/>}</h1>  : <h1>Getting Your data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 
