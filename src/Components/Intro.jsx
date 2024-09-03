@@ -21,7 +21,10 @@ const Intro = () => {
             <li>Players will earn points for each phrase that is solved correctly!</li>
            </ol>
           </h4>
-          <input className="intro-demo" placeholder='Demo Vid'></input>
+          <video className="intro-demo" width="500px" height="400px" controls="controls">
+              <source src="images/winner 1.mp4" type="video/mp4" />
+          </video>
+          
           
           
               <Link to="/game">

@@ -276,6 +276,7 @@ input {
     /* padding: 2%; */
     background-color: #7EE8FA;
     border-radius: 8px;
+    border: solid 6px;
 }
 ul {
     list-style-type: none;
@@ -314,6 +315,19 @@ ul {
 }
 img {
     border-radius: 50%;
+}
+.user-avatar-image {
+    width: 2.5rem;
+    height: 2.5rem
+}
+
+.user-badge-image{
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    align-items: center;
+    width: 5rem;
+    height: 5rem
 }
 
 .footer {
@@ -363,16 +377,6 @@ img {
 .footerlink {
     width: 40px;
     height: 40px;
-}
-
-.user-avatar-image {
-    width: 2.5rem;
-    height: 2.5rem
-}
-
-.user-badge-image{
-    width: 5rem;
-    height: 5rem
 }
 
 button {
