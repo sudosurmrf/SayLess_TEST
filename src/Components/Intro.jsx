@@ -22,7 +22,7 @@ const Intro = () => {
            </ol>
           </h4>
           <video className="intro-demo" width="500px" height="400px" controls="controls">
-              <source src="images/winner 1.mp4" type="video/mp4" />
+              <source src="images/intro-vid.mp4" type="video/mp4" />
           </video>
           
           
