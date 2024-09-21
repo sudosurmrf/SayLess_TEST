@@ -82,8 +82,8 @@ router.patch('/change-pw', verifyToken, async (req, res, next) => {
 router.patch('/change-email', verifyToken, async (req, res, next) => {
   try {
     const { newEmail } = req.body;
-    await changeEmail(req.user.userId, newEmail);
-    res.status(200).json({ message: 'Email Change Successful' });
+    const updatedAndCensoredEmail = await changeEmail(req.user.userId, newEmail);
+    res.status(200).json({ updatedAndCensoredEmail });
   } catch (err) {
     res.status(500).json({ message: 'Email Change Failed', error: err.message });
   }
