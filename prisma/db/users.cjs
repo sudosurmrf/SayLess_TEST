@@ -53,6 +53,12 @@ const getUser = async(usernameToTry, passwordToTry) => {
   }
 }
 
+const censorEmail = (email) => {
+  const [name, domain] = email.split('@');
+  const censoredName = name[0] + `***`;
+  return censoredName + `@` + domain;
+}
+
 const getUserAcctDetails = async (userId) => {
   try {  
     const userDetails = await prisma.user.findUnique({
@@ -62,11 +68,14 @@ const getUserAcctDetails = async (userId) => {
       select: {
         id: true,
         username: true,
+        email: true,
         wins: true,
         losses: true,
-        avatarId: true,
+        avatarId: true
       }
     })
+
+    userDetails.email = censorEmail(userDetails.email);
 
     return userDetails
   } catch (error){
@@ -76,14 +85,21 @@ const getUserAcctDetails = async (userId) => {
 
 const changeEmail = async(userId, newEmail) => {
   try {
-    await prisma.user.update({
+    const updated = await prisma.user.update({
       where: {
         id: userId
       },
       data: {
         email: newEmail
+      },
+      select: {
+        email: true
       }
     })
+
+    const updatedAndCensoredEmail = censorEmail(updated.email);
+    return updatedAndCensoredEmail;
+
   } catch (error) {
     return (`Couldn't change email`, error.message);
   }
