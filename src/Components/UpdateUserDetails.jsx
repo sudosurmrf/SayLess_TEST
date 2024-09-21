@@ -1,13 +1,36 @@
-import { useState } from "react";
-import axios from 'axios'
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UpdateUserDetails = () => {
+  const [currentEmail, setCurrentEmail] = useState('');
   const [emailInput, setEmailInput]= useState('');
   const [passwordInput, setPasswordInput]= useState('');
   const [secondaryPasswordInput, setSecondaryPasswordInput]= useState('');
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showChangeEmail, setShowChangeEmail] = useState(false);
-    
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setCurrentEmail(response.data.userInfo.email);
+      } catch (error) {
+        console.error('Failed to fetch user email:', error);
+        navigate('/Login'); 
+      }
+    };
+
+    fetchUserEmail();
+  }, [navigate]);
+
   const changeEmail = async(event) => {
     event.preventDefault();
       try{
@@ -20,6 +43,7 @@ const UpdateUserDetails = () => {
         config
         );
         console.log(response.data);
+        setCurrentEmail(response.data.updatedAndCensoredEmail);
       }catch(err) {
         if (axios.isAxiosError(err)) {
           console.error('Axios error:', err.response?.data || err.message);
@@ -27,6 +51,7 @@ const UpdateUserDetails = () => {
           console.error('Unexpected error:', err);
         }
       }
+      setEmailInput(``);
     }
 
   const changePW = async(event) => {
@@ -58,9 +83,9 @@ const UpdateUserDetails = () => {
       
       {showChangeEmail ?
         <>
-          {/* This line will be implemented with token so the user knows their email. Should ask Jonathan about best practice regarding user account info <h3>Your Current Email is:</h3> */}
+          <h3>Your Current Email Is: {currentEmail}</h3>
           <form className="uud">
-            <input type="email" value={emailInput} onChange={(event)=>{setEmailInput(event.target.value)}} placeholder='"Enter New Email' /> <br />
+            <input type="email" value={emailInput} onChange={(event)=>{setEmailInput(event.target.value)}} placeholder='Enter New Email' /> <br />
             <button onClick={(e) => {e.preventDefault(); changeEmail(e)}}>Change Email</button>
           </form> 
           <button onClick={() => {setShowChangeEmail(false)}}>Maybe on second thought, my email is fine.</button>
