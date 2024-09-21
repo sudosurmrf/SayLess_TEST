@@ -7,7 +7,8 @@ const UpdateUserDetails = () => {
   const [secondaryPasswordInput, setSecondaryPasswordInput]= useState('');
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showChangeEmail, setShowChangeEmail] = useState(false);
-    
+  const [passwordUpdated, setPasswordUpdated] = useState(false);
+  
   const changeEmail = async(event) => {
     event.preventDefault();
       try{
@@ -29,7 +30,15 @@ const UpdateUserDetails = () => {
       }
     }
 
+  const onPasswordUpdate = (status) => {
+    setPasswordUpdated(status);
+    setTimeout(() => {
+      setPasswordUpdated(false);
+    }, 3000);
+  };
+    
   const changePW = async(event) => {
+    event.preventDefault();
     if(passwordInput === secondaryPasswordInput){
       try{
         const token = localStorage.getItem('token');
@@ -37,20 +46,23 @@ const UpdateUserDetails = () => {
           headers: { Authorization: `Bearer ${token}` }
         };
         
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {newPassword: passwordInput},
-        config  
-        );
+        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {newPassword: passwordInput}, config);
         console.log(response.data);
+        onPasswordUpdate(true);
       }catch(err) {
         if (axios.isAxiosError(err)) {
           console.error('Axios error:', err.response?.data || err.message);
         } else {
           console.error('Unexpected error:', err);
         }
+        onPasswordUpdate(false);
       }
     } else{
       alert('Passwords do not match, Please try again!');
+      onPasswordUpdate(false);
     }
+    setPasswordInput(``);
+    setSecondaryPasswordInput(``);
   }
 
   return (
@@ -76,6 +88,7 @@ const UpdateUserDetails = () => {
             <input type="password" value={secondaryPasswordInput} onChange={(event)=>{setSecondaryPasswordInput(event.target.value)}} placeholder='"Enter New Password Again' /> <br />
             <button onClick={(e)=>{changePW(e)}}>Change Password</button>
           </form>
+          {passwordUpdated ? <h2>Password updated!</h2>: null}
           <button onClick={() => {setShowChangePassword(false)}}>Maybe on second thought, my password is fine.</button>
         </>
       :
