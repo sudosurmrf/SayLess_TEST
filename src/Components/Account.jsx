@@ -5,7 +5,7 @@ import { selectBadges, winBadgesArray, playBadgesArray } from './Badges.jsx';
 import UpdateUserDetails from './updateUserDetails';
 import axios from 'axios';
 
-const Account = () => {
+const Account = ({ setLoginMessage }) => {
   const [username, setUsername] = useState("");
   const [gamesWon, setGamesWon] = useState(0);
   const [gamesLost, setGamesLost] = useState(0);
@@ -40,6 +40,7 @@ const Account = () => {
         
         } catch (error){
           console.log('Unable to get data', error)
+          setLoginMessage(token);
           navigate('/Login');
         };   
       };
@@ -86,7 +87,6 @@ const Account = () => {
             </h3>
           </section>
         </section>
-                                       
         <UpdateUserDetails />
     </>
   )

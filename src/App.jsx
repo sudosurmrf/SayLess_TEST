@@ -9,14 +9,15 @@ import Login from './Components/Login.jsx';
 
 
 function App() {
+  const [loginMessage, setLoginMessage] = useState(``);
 
   return (
     <>
       <Router>
        <Nav />
        <Routes>
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/account" element={ <Account /> } />
+          <Route path="/login" element={ <Login loginMessage={loginMessage} setLoginMessage={setLoginMessage} /> } />
+          <Route path="/account" element={ <Account setLoginMessage={setLoginMessage} /> } />
           <Route path="/" element={ <Intro /> } />
           <Route path="/game" element={ <Game /> } />
         </Routes>  

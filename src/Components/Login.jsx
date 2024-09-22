@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ loginMessage, setLoginMessage }) => {
   const [showLogin, setShowLogin] = useState(true);
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [usernameInput, setUsernameInput] = useState("");
@@ -52,11 +52,17 @@ const Login = () => {
     }
   };
 
+  const switchForms = () => {
+    setShowLogin(!showLogin);
+    setLoginMessage('');
+  };
+
     return (
       <>
         
         <div className="login-container">
           <h1>{showLogin ? 'Login Page' : 'Register Page'}</h1>
+          {loginMessage === `Either username or password do not match our records.` ? <h3>{loginMessage}</h3>:null}
           <form>
             <div className="login-input">
             <input value={usernameInput} onChange={(event) => setUsernameInput(event.target.value)} type="text" placeholder="username" required /> <br />
@@ -72,13 +78,13 @@ const Login = () => {
             <>
               <button type="button" className="switch-link" onClick={logInUser}>Log In</button>
               <br /> 
-              <button type="button" className="switch-link" onClick={() => setShowLogin(false)}>Not a User? Sign up HERE</button>
+              <button type="button" className="switch-link" onClick={switchForms}>Not a User? Sign up HERE</button>
             </>
           ) : (
             <>
               <button type="button" className="switch-link" onClick={registerUser}>Sign up</button>
               <br /> 
-              <button type="button" className="switch-link" onClick={() => setShowLogin(true)}>Already a User? Login</button>
+              <button type="button" className="switch-link" onClick={switchForms}>Already a User? Login</button>
             </>
           )}
           </form>
