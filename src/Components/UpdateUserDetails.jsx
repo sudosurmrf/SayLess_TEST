@@ -9,6 +9,7 @@ const UpdateUserDetails = () => {
   const [secondaryPasswordInput, setSecondaryPasswordInput]= useState('');
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showChangeEmail, setShowChangeEmail] = useState(false);
+  const [emailUpdated, setEmailUpdated] = useState(false);
   const [passwordUpdated, setPasswordUpdated] = useState(false);
 
   const navigate = useNavigate();
@@ -32,6 +33,13 @@ const UpdateUserDetails = () => {
     fetchUserEmail();
   }, [navigate]);
 
+  const onEmailUpdate = (status) => {
+    setEmailUpdated(status);
+    setTimeout(() => {
+      setEmailUpdated(false);
+    }, 3000);
+  };
+
   const changeEmail = async(event) => {
     event.preventDefault();
       try{
@@ -45,12 +53,14 @@ const UpdateUserDetails = () => {
         );
         console.log(response.data);
         setCurrentEmail(response.data.updatedAndCensoredEmail);
+        onEmailUpdate(true);
       }catch(err) {
         if (axios.isAxiosError(err)) {
           console.error('Axios error:', err.response?.data || err.message);
         } else {
           console.error('Unexpected error:', err);
         }
+        onEmailUpdate(false);
       }
       setEmailInput(``);
     }
@@ -100,6 +110,7 @@ const UpdateUserDetails = () => {
             <input type="email" value={emailInput} onChange={(event)=>{setEmailInput(event.target.value)}} placeholder='Enter New Email' /> <br />
             <button onClick={(e) => {e.preventDefault(); changeEmail(e)}}>Change Email</button>
           </form> 
+          {emailUpdated ? <h2>Email updated!</h2>: null}
           <button onClick={() => {setShowChangeEmail(false)}}>Maybe on second thought, my email is fine.</button>
         </>
       :
