@@ -1,3 +1,4 @@
+const { Prisma } = require('@prisma/client');
 const prisma = require('./client.cjs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -17,7 +18,12 @@ const createUser = async(username, password, email) => {
     })
     return { success: true, username: username };
   } catch (error) {
-    return (`Couldn't create user`, error.message);
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          throw ("The username is already in use. Please choose a different one.")
+        }
+      }
+    throw (`Couldn't create user`, error.message);
   }
 }
 
