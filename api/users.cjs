@@ -31,7 +31,10 @@ router.post('/register', async(req, res, next) => {
     const newUser = await createUser(username, password, email);
     res.send(newUser);
   } catch (error) {
-    next(error);
+      if (error === `The username is already in use. Please choose a different one.`) {
+        res.status(409).send({ error });
+      }
+      next(error);
   }
 });
 
