@@ -5,6 +5,7 @@ import axios from 'axios';
 const Login = ({ loginMessage, setLoginMessage }) => {
   const [showLogin, setShowLogin] = useState(true);
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
+  const [registrationFailMessage, setRegistrationFailMessage] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -41,8 +42,10 @@ const Login = ({ loginMessage, setLoginMessage }) => {
         });
           setShowLogin(true);
           setRegistrationSuccessful(true);
+          setRegistrationFailMessage('');
         } catch (error) {
-          console.log(error);
+          setRegistrationSuccessful(false);
+          setRegistrationFailMessage(error.response.data.error);
       }
   
         setUsernameInput("");
@@ -55,6 +58,7 @@ const Login = ({ loginMessage, setLoginMessage }) => {
   const switchForms = () => {
     setShowLogin(!showLogin);
     setLoginMessage('');
+    setRegistrationFailMessage('');
   };
 
     return (
@@ -63,6 +67,7 @@ const Login = ({ loginMessage, setLoginMessage }) => {
         <div className="login-container">
           <h1>{showLogin ? 'Login Page' : 'Register Page'}</h1>
           {loginMessage === `Either username or password do not match our records.` ? <h3>{loginMessage}</h3>:null}
+          {registrationFailMessage ? <h3>{registrationFailMessage}</h3>:null}
           <form>
             <div className="login-input">
             <input value={usernameInput} onChange={(event) => setUsernameInput(event.target.value)} type="text" placeholder="username" required /> <br />
