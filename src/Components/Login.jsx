@@ -55,6 +55,15 @@ const Login = ({ loginMessage, setLoginMessage }) => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (showLogin) {
+      logInUser();
+    } else {
+      registerUser();
+    }
+  }
+
   const switchForms = () => {
     setShowLogin(!showLogin);
     setLoginMessage('');
@@ -68,7 +77,7 @@ const Login = ({ loginMessage, setLoginMessage }) => {
           <h1>{showLogin ? 'Login Page' : 'Register Page'}</h1>
           {loginMessage === `Either username or password do not match our records.` ? <h3>{loginMessage}</h3>:null}
           {registrationFailMessage ? <h3>{registrationFailMessage}</h3>:null}
-          <form>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <div className="login-input">
             <input value={usernameInput} onChange={(event) => setUsernameInput(event.target.value)} type="text" placeholder="username" required /> <br />
             <input value={passwordInput} onChange={(event) => setPasswordInput(event.target.value)} type="password" placeholder="password" required /> <br /></div>
@@ -81,13 +90,13 @@ const Login = ({ loginMessage, setLoginMessage }) => {
           )}
           {showLogin ? (
             <>
-              <button type="button" className="switch-link" onClick={logInUser}>Log In</button>
+              <button type="submit" className="switch-link">Log In</button>
               <br /> 
               <button type="button" className="switch-link" onClick={switchForms}>Not a User? Sign up HERE</button>
             </>
           ) : (
             <>
-              <button type="button" className="switch-link" onClick={registerUser}>Sign up</button>
+              <button type="submit" className="switch-link">Sign up</button>
               <br /> 
               <button type="button" className="switch-link" onClick={switchForms}>Already a User? Login</button>
             </>
