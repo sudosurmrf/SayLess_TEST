@@ -106,9 +106,9 @@ const UpdateUserDetails = () => {
       {showChangeEmail ?
         <>
           <h3>Your Current Email Is: {currentEmail}</h3>
-          <form className="uud">
-            <input type="email" value={emailInput} onChange={(event)=>{setEmailInput(event.target.value)}} placeholder='Enter New Email' /> <br />
-            <button onClick={(e) => {e.preventDefault(); changeEmail(e)}}>Change Email</button>
+          <form className="uud" onSubmit={(e) => changeEmail(e)}>
+            <input type="email" value={emailInput} onChange={(event)=>{setEmailInput(event.target.value)}} placeholder='Enter New Email' required /> <br />
+            <button type="submit">Change Email</button>
           </form> 
           {emailUpdated ? <h2>Email updated!</h2>: null}
           <button onClick={() => {setShowChangeEmail(false)}}>Maybe on second thought, my email is fine.</button>
@@ -119,10 +119,10 @@ const UpdateUserDetails = () => {
 
       {showChangePassword ?
         <>
-          <form className="uud">
-            <input type="password" value={passwordInput} onChange={(event)=>{setPasswordInput(event.target.value)}} placeholder='"Enter New Password' /> <br />
-            <input type="password" value={secondaryPasswordInput} onChange={(event)=>{setSecondaryPasswordInput(event.target.value)}} placeholder='"Enter New Password Again' /> <br />
-            <button onClick={(e)=>{changePW(e)}}>Change Password</button>
+          <form className="uud" onSubmit={(e) => changePW(e)}>
+            <input type="password" value={passwordInput} onChange={(event)=>{setPasswordInput(event.target.value)}} placeholder='Enter New Password' required /> <br />
+            <input type="password" value={secondaryPasswordInput} onChange={(event)=>{setSecondaryPasswordInput(event.target.value)}} placeholder='Confirm New Password' required /> <br />
+            <button type="submit">Change Password</button>
           </form>
           {passwordUpdated ? <h2>Password updated!</h2>: null}
           <button onClick={() => {setShowChangePassword(false)}}>Maybe on second thought, my password is fine.</button>
