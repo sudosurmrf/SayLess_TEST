@@ -71,12 +71,12 @@ const Login = ({ loginMessage, setLoginMessage }) => {
   };
 
     return (
-      <>
         
         <div className="login-container">
           <h1>{showLogin ? 'Login Page' : 'Register Page'}</h1>
           {loginMessage === `Either username or password do not match our records.` ? <h3>{loginMessage}</h3>:null}
           {registrationFailMessage ? <h3>{registrationFailMessage}</h3>:null}
+          {registrationSuccessful ? <h3>Account created! You can log in now.</h3>:null}
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="login-input">
             <input value={usernameInput} onChange={(event) => setUsernameInput(event.target.value)} type="text" placeholder="username" required /> <br />
@@ -104,9 +104,6 @@ const Login = ({ loginMessage, setLoginMessage }) => {
           </form>
         </div>
         
-        {registrationSuccessful ? <h2>Account created! You can log in now.</h2>: null}
-   
-      </>
   );
 };
 
