@@ -19,7 +19,7 @@ const server = http.createServer(app);
 // TODO this origin needs to be changed to not be hard-coded
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "http://sayless.onrender.com", // this may be changed further, point being that this should be actual website url
     methods: ["GET", "POST"],
   },
 });
