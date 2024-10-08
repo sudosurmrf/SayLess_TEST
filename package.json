@@ -2,7 +2,6 @@
   "name": "sayless",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,7 +9,8 @@
     "preview": "vite preview",
     "seed:dev": "npx prisma migrate reset --force && node ./prisma/db/seed.cjs",
     "start:server": "nodemon ./server.cjs",
-    "start:dev": "concurrently \"nodemon server.cjs\" \"npm run dev\""
+    "start:dev": "concurrently \"nodemon server.cjs\" \"npm run dev\"",
+    "start": "node server.cjs"
   },
   "dependencies": {
     "@prisma/client": "^5.19.0",

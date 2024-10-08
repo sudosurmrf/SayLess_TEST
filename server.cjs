@@ -2,12 +2,17 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const path = require('path');
+require('dotenv').config();
 
 const app = express();
 
 app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/v1', require('./api/index.cjs'));
+app.use()
 
 const server = http.createServer(app);
 
@@ -50,8 +55,17 @@ io.on('connection', (socket) =>{
 
 });
 
+app.get('/', (req, res, next) =>(
+  res.sendFile(path.join(__dirname,'dist','index.html'))
+));
+
+app.get('*', (req, res, next) =>(
+  res.sendFile(path.join(__dirname,'dist','index.html'))
+));
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log(`listening on port ${PORT}`)});
 
-const socket = process.env.SOCKET_PORT || 3001;
-server.listen(socket, () => {console.log(`listening on ${socket}`)});
+
+const SOCKET = process.env.SOCKET_PORT || 3001;
+server.listen(SOCKET, () => {console.log(`listening on ${SOCKET}`)});
