@@ -17,7 +17,7 @@ const UpdateUserDetails = () => {
     const fetchUserEmail = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/userdetails`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -47,7 +47,7 @@ const UpdateUserDetails = () => {
       try{
         const token = localStorage.getItem('token');
         
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/change-email`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/change-email`, {
           method: 'PATCH',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ const UpdateUserDetails = () => {
       try{
         const token = localStorage.getItem('token');
         
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/change-pw`, {
           method: 'PATCH',
           headers: {
             'Authorization': `Bearer ${token}`,

@@ -14,7 +14,7 @@ const Login = ({ loginMessage, setLoginMessage }) => {
 
   const logInUser = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const Login = ({ loginMessage, setLoginMessage }) => {
   const registerUser = async () => {
     if (passwordInput === secondaryPasswordInput) {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

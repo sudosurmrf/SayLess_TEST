@@ -21,7 +21,7 @@ const Account = ({ setLoginMessage }) => {
     const getUserData = async () =>{
       const token = localStorage.getItem('token');
         try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/userdetails`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
