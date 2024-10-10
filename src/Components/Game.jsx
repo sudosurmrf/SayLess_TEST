@@ -29,19 +29,22 @@ const Game = () => {
   const [socket, setSocket] = useState(null);
   
   const apiURL = import.meta.env.VITE_API_URL;
-  const socketPort = import.meta.env.SOCKET_PORT;
+  // const socketPort = import.meta.env.SOCKET_PORT;
 
 
   useEffect(() => {
     // const newSocket = io.connect(`${import.meta.env.VITE_API_URL}:${import.meta.env.SOCKET_PORT}`);
-    const newSocket = io.connect(`https://sayless.onrender.com`);
+    const newSocket = io.connect(`https://sayless.onrender.com`, {
+      withCredentials: true,
+      transports: ['websocket'],
+    });
     setSocket(newSocket);
     return () => {
       if (newSocket) {
         newSocket.disconnect();
       }
     };
-  }, [apiURL, socketPort]);
+  }, [apiURL]);
 
   useEffect(() => {
     if (!socket) return;
