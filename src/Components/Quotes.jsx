@@ -1,5 +1,5 @@
 export const getRandomQuote = (quotes) => {
-  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const randomIndex = Math.floor(Math.random() * quotes.length -1);
   return quotes[randomIndex];
 }
 
