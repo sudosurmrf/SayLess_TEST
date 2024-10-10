@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { getRandomQuote, famousQuotes } from './Quotes.jsx';
 import io from 'socket.io-client';
 import axios from 'axios';
-require('dontenv').config();
 
 
 // TODO need to adjust where this connects to later likely
