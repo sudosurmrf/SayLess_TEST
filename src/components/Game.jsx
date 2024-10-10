@@ -180,7 +180,7 @@ const Game = () => {
       { showLobby ?
         <>
           <h2 className="game-h2"> Welcome to Say Less </h2>
-          <button className="game-p1" onClick={() => {gameStart()}} type="button">Click Here to be Player One</button>
+          <button className="game-p1" onClick={() => {gameStart()}} type="button">Click Here to  be Player One</button>
         </>
         :
         <></>
