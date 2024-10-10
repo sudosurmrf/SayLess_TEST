@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { selectAvatar } from './Avatars.jsx';
 import { selectBadges, winBadgesArray, playBadgesArray } from './Badges.jsx';
 import UpdateUserDetails from './updateUserDetails';
-import axios from 'axios';
 
 const Account = ({ setLoginMessage }) => {
   const [username, setUsername] = useState("");
@@ -22,21 +21,25 @@ const Account = ({ setLoginMessage }) => {
     const getUserData = async () =>{
       const token = localStorage.getItem('token');
         try {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+            method: 'GET',
             headers: {
-              'Authorization': `Bearer ${token}`
-            }
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
           });
 
-          setUsername(response.data.userInfo.username);
-          setGamesWon(response.data.userInfo.wins)
-          setGamesLost(response.data.userInfo.losses);
+          const data = await response.json();
+
+          setUsername(data.userInfo.username);
+          setGamesWon(data.userInfo.wins)
+          setGamesLost(data.userInfo.losses);
           setGamesPlayed((gamesWon + gamesLost));
           setWLRatio((gamesWon / gamesLost).toFixed(2));
-          setUserWinBadgesInfo(response.data.userWinBadges.winBadges);
-          setUserPlayBadgesInfo(response.data.userPlayBadges.playBadges);
-          setUserAvatarId(response.data.userInfo.avatarId)
-          setUserQuotes(response.data.customQuotes);
+          setUserWinBadgesInfo(data.userWinBadges.winBadges);
+          setUserPlayBadgesInfo(data.userPlayBadges.playBadges);
+          setUserAvatarId(data.userInfo.avatarId)
+          setUserQuotes(data.customQuotes);
         
         } catch (error){
           console.log('Unable to get data', error)
@@ -58,7 +61,7 @@ const Account = ({ setLoginMessage }) => {
   return (
     <>
 
-      {username ? <h1> Welcome {username} {<img className={avatar.className} src={avatar.image}/>}</h1>  : <h1>Getting Your data</h1> } 
+      {username ? <h1> Welcome {username} {<img className={avatar.className} src={avatar.image}/>}</h1>  : <h1>Getting Your Data</h1> } 
 
         <h1>Your Account History</h1> <br /><br />
 

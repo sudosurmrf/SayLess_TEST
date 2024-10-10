@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const UpdateUserDetails = () => {
@@ -18,12 +17,15 @@ const UpdateUserDetails = () => {
     const fetchUserEmail = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/userdetails`, {
+          method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
         });
-        setCurrentEmail(response.data.userInfo.email);
+        const data = await response.json();        
+        setCurrentEmail(data.userInfo.email);
       } catch (error) {
         console.error('Failed to fetch user email:', error);
         navigate('/Login'); 
@@ -44,22 +46,26 @@ const UpdateUserDetails = () => {
     event.preventDefault();
       try{
         const token = localStorage.getItem('token');
-        const config = {
-          headers: { Authorization: `Bearer ${token}` }
-        };
         
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-email`, {newEmail: emailInput},
-        config
-        );
-        console.log(response.data);
-        setCurrentEmail(response.data.updatedAndCensoredEmail);
-        onEmailUpdate(true);
-      }catch(err) {
-        if (axios.isAxiosError(err)) {
-          console.error('Axios error:', err.response?.data || err.message);
-        } else {
-          console.error('Unexpected error:', err);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/change-email`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ newEmail: emailInput }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data);
         }
+
+        setCurrentEmail(data.updatedAndCensoredEmail);
+        onEmailUpdate(true);
+      } catch (error) {
+        console.error('Error changing email:', error);
         onEmailUpdate(false);
       }
       setEmailInput(``);
@@ -77,22 +83,28 @@ const UpdateUserDetails = () => {
     if(passwordInput === secondaryPasswordInput){
       try{
         const token = localStorage.getItem('token');
-        const config = {
-          headers: { Authorization: `Bearer ${token}` }
-        };
         
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {newPassword: passwordInput}, config);
-        console.log(response.data);
-        onPasswordUpdate(true);
-      }catch(err) {
-        if (axios.isAxiosError(err)) {
-          console.error('Axios error:', err.response?.data || err.message);
-        } else {
-          console.error('Unexpected error:', err);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/change-pw`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({newPassword: passwordInput}),
+        });  
+        
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data);
         }
+
+        onPasswordUpdate(true);
+      } catch (error) {
+        console.error('Error changing password:', error);
         onPasswordUpdate(false);
       }
-    } else{
+    } else {
       alert('Passwords do not match, Please try again!');
       onPasswordUpdate(false);
     }

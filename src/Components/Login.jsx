@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const Login = ({ loginMessage, setLoginMessage }) => {
   const [showLogin, setShowLogin] = useState(true);
@@ -15,17 +14,24 @@ const Login = ({ loginMessage, setLoginMessage }) => {
 
   const logInUser = async () => {
     try {
-
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, {
-        username: usernameInput,
-        password: passwordInput,
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: usernameInput,
+          password: passwordInput,
+        }),
       });
-      console.log(`log in response`, response);   
+
+      const data = await response.json();
+
       if (response.status === 200) {
-        localStorage.setItem('token', response.data.token); 
+        localStorage.setItem('token', data.token); 
         navigate('/account')
       } else {
-        console.log(`Login failed:`, response.data.message);
+        throw new Error(`Login failed:`, data.message);
       }
     } catch (error) {
       console.log(error);
@@ -35,23 +41,35 @@ const Login = ({ loginMessage, setLoginMessage }) => {
   const registerUser = async () => {
     if (passwordInput === secondaryPasswordInput) {
       try {
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/register`, {
-          username: usernameInput,
-          password: passwordInput,
-          email: emailInput,
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: usernameInput,
+            password: passwordInput,
+            email: emailInput,
+          }),
         });
-          setShowLogin(true);
-          setRegistrationSuccessful(true);
-          setRegistrationFailMessage('');
-        } catch (error) {
-          setRegistrationSuccessful(false);
-          setRegistrationFailMessage(error.response.data.error);
+        
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error);
+        }
+
+        setShowLogin(true);
+        setRegistrationSuccessful(true);
+        setRegistrationFailMessage('');
+      } catch (error) {
+        setRegistrationSuccessful(false);
+        setRegistrationFailMessage(error.message);
       }
-  
-        setUsernameInput("");
-        setEmailInput("");
-        setPasswordInput("");
-        setSecondaryPasswordInput("");
+      setUsernameInput("");
+      setEmailInput("");
+      setPasswordInput("");
+      setSecondaryPasswordInput("");
     }
   };
 
