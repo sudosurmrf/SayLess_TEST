@@ -7,31 +7,51 @@ const apiURL = import.meta.env.VITE_API_URL;
 const socketPort = import.meta.env.SOCKET_PORT;
 
 // TODO need to adjust where this connects to later likely
-useEffect(() => {
-  const newSocket = io.connect(`${apiURL}:${socketPort}`);
-  setSocket(newSocket);
-  return () => newSocket.disconnect();
-}, []);
 
 
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
   const [quote, setQuote] = useState("");
-
+  
   const [maxLengthVariable, setMaxLengthVariable] = useState(20);
-
+  
   const [showLobby, setShowLobby] = useState(true);
   const [showPlayerOneTurn, setShowPlayerOneTurn] = useState(false);
   const [showPlayerTwoWait, setShowPlayerTwoWait] = useState(false);
   const [showPlayerTwoTurn, setShowPlayerTwoTurn] = useState(false);
   const [showPlayerOneWait, setShowPlayerOneWait] = useState(false);
   const [showGameResult, setShowGameResult] = useState(false);
-
+  
   const [seconds, setSeconds] = useState(0);
-
+  
   const [playerOneInput, setPlayerOneInput] = useState("");
   const [playerTwoInput, setPlayerTwoInput] = useState("");
   const [winOrLose, setWinOrLose] = useState("");
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io.connect(`${apiURL}:${socketPort}`);
+    setSocket(newSocket);
+    return () => {
+      if (newSocket) {
+        newSocket.disconnect();
+      }
+    };
+  }, [apiURL, socketPort]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    // Event listeners, for example:
+    socket.on("p1start", () => {
+      console.log("Player 1 start event received");
+    });
+
+   
+    return () => {
+      socket.off("p1start");
+    };
+  }, [socket]);
 
   useEffect(()=> {
     setAllQuotes(famousQuotes)
@@ -49,6 +69,8 @@ const Game = () => {
   },[seconds])
 
   useEffect(()=>{
+    if (!socket) return; //added this for when socket is null on first load since you guys are using useStates and not useRef
+
     socket.on("p1start", () => {
       setShowLobby(false);
       setShowPlayerOneTurn(true);
@@ -112,7 +134,7 @@ const Game = () => {
     return (() => {
       socket.off('disconnect')
     });
-  },[])
+  },[socket])
 
   const countWordsEasy = (text) => {
     let noVowels = text.replace(/[aeiou]/g,'');
