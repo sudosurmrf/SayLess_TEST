@@ -1,12 +1,3 @@
-export const selectBadges = (badgesArray,idArray) => {
-  const selectedImages = [];
-  for (let i = 0; i < idArray.length - 1; i++){
-    const badgeIndex = idArray[i].id
-    selectedImages.push(badgesArray[badgeIndex])
-  }
-  return selectedImages
-}
-
 export const winBadgesArray = [
   { id: 1, className: "user-badge-image", image: "/images/badges/badge-game-1.png", alt: "1 win badge" },
   { id: 2, className: "user-badge-image", image: "/images/badges/badge-game-5.png", alt: "5 win badge" },
@@ -27,3 +18,12 @@ export const playBadgesArray = [
   { id: 7, className: "user-badge-image", image: "/images/badges/badge-win-500.png", alt: "500 play badge" },
   { id: 8, className: "user-badge-image", image: "/images/badges/badge-win-1000.png", alt: "1000 play badge" }
 ];
+
+export const selectBadges = (badgesArray,idArray) => {
+  const selectedImages = [];
+  for (let i = 0; i < idArray.length; i++){
+    const badgeIndex = idArray[i].id
+    selectedImages.push(badgesArray[badgeIndex -1])
+  }
+  return selectedImages
+}

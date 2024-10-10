@@ -79,6 +79,7 @@ const Account = ({ setLoginMessage }) => {
             <h3>Your Badges:
               <ul>
                 {wBadges.map((badge)=>{
+
                   return <li key={badge.id}>
                     <img className={badge.className} src={badge.image} alt={badge.alt}/>
                   </li>})}
@@ -87,7 +88,7 @@ const Account = ({ setLoginMessage }) => {
                     <img className={badge.className} src={badge.image} alt={badge.alt}/>
                   </li>})}
                 </ul>
-            </h3>
+                </h3>
           </section>
         </section>
         <UpdateUserDetails />
