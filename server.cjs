@@ -1,5 +1,5 @@
 const express = require('express');
-const https = require('https');
+const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 
 
-const allowedOrigins = ['http://localhost:3000', 'https://sayless.onrender.com', 'https://www.sayless.onrender.com', 'http://sayless.onrender.com', 'sayless:80','http://www.sayless.onrender.com'];
+const allowedOrigins = ['http://localhost:3000', 'https://sayless.onrender.com', 'https://www.sayless.onrender.com', 'http://sayless.onrender.com', 'sayless:443','http://www.sayless.onrender.com'];
 
 app.options('*', (req, res) => {
   const origin = req.headers.origin;
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/v1', require('./api/index.cjs'));
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 
 // TODO this origin needs to be changed to not be hard-coded
 const io = new Server(server, {
@@ -84,15 +84,11 @@ io.on('connection', (socket) =>{
 
 });
 
-app.get('/', (req, res, next) =>(
-  res.sendFile(path.join(__dirname,'dist','index.html'))
-));
-
 app.get('*', (req, res, next) =>(
   res.sendFile(path.join(__dirname,'dist','index.html'))
 ));
 
-const PORT = process.env.PORT || 443; // Use port 443 for HTTPS by default
+const PORT = process.env.PORT || 3000; // Use port 443 for HTTPS by default
 
 server.listen(PORT, () => {
   console.log(`HTTPS server and Socket.io are listening on port ${PORT}`);
