@@ -1,5 +1,5 @@
 const express = require('express');
-const http = require('http');
+const https = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
@@ -22,13 +22,13 @@ app.options('*', (req, res) => {
 });
 app.use(cors({
   origin: function (origin, callback) {
-    console.log('Request Origin:', origin);  // Log the incoming origin
+    console.log('Request Origin:', origin);  
 
-    if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true); 
 
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      console.error('Blocked Origin:', origin); // Log blocked origins
+      console.error('Blocked Origin:', origin); 
       return callback(new Error(msg), false);
     }
     return callback(null, true);
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/v1', require('./api/index.cjs'));
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 
 // TODO this origin needs to be changed to not be hard-coded
 const io = new Server(server, {
