@@ -29,7 +29,6 @@ const Game = () => {
   const [socket, setSocket] = useState(null);
   
   const apiURL = import.meta.env.VITE_API_URL;
-  // const socketPort = import.meta.env.SOCKET_PORT;
 
 
   useEffect(() => {
@@ -45,20 +44,6 @@ const Game = () => {
       }
     };
   }, [apiURL]);
-
-  useEffect(() => {
-    if (!socket) return;
-
-    // Event listeners, for example:
-    socket.on("p1start", () => {
-      console.log("Player 1 start event received");
-    });
-
-   
-    return () => {
-      socket.off("p1start");
-    };
-  }, [socket]);
 
   useEffect(()=> {
     setAllQuotes(famousQuotes)
