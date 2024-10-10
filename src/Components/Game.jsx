@@ -184,7 +184,6 @@ const Game = () => {
     if (socket) {
       console.log("Socket is defined, emitting 'lobbysend'");
       socket.emit("lobbysend");
-      console.log("did this emit?");
     } else {
       console.error("Socket is not defined");
     }
