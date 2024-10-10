@@ -157,7 +157,7 @@ const Game = () => {
     const token = localStorage.getItem('token');
       if ((token !== undefined)){
         try{
-          const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/player-${winLose}`, {
+          const response = await axios.patch(`${import.meta.env.VITE_API_URL}/api/v1/users/player-${winLose}`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
