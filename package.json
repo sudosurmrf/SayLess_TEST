@@ -7,7 +7,6 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node server.cjs",
     "seed:dev": "npx prisma migrate reset --force && node ./prisma/db/seed.cjs",
     "start:server": "nodemon ./server.cjs",
     "start:dev": "concurrently \"nodemon server.cjs\" \"npm run dev\"",
