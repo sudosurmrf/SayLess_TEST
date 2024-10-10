@@ -2,7 +2,7 @@ import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { selectAvatar } from './Avatars.jsx';
 import { selectBadges, winBadgesArray, playBadgesArray } from './Badges.jsx';
-import UpdateUserDetails from './updateUserDetails';
+import UpdateUserDetails from './UpdateUserDetails';
 
 const Account = ({ setLoginMessage }) => {
   const [username, setUsername] = useState("");
