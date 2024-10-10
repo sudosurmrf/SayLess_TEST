@@ -5,7 +5,7 @@ const Intro = () => {
     return (
       <>
         <div className="header">
-         <img src="images/logo-blue.png" alt="SayLess logo with smiling mouth"></img>
+         <img src="/images/logo-blue.png" alt="SayLess logo with smiling mouth"></img>
         </div>
 
         <h2 className="motto">The fun phrase game you will be itching to play!</h2>
