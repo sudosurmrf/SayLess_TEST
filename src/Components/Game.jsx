@@ -7,7 +7,12 @@ const apiURL = import.meta.env.VITE_API_URL;
 const socketPort = import.meta.env.SOCKET_PORT;
 
 // TODO need to adjust where this connects to later likely
-const socket = io.connect(`${apiURL}:${socketPort}`);
+useEffect(() => {
+  const newSocket = io.connect(`${apiURL}:${socketPort}`);
+  setSocket(newSocket);
+  return () => newSocket.disconnect();
+}, []);
+
 
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
@@ -137,6 +142,7 @@ const Game = () => {
   }
 
   const gameStart = () =>{
+    console.log("game start clicked");
     socket.emit("lobbysend");
   }
 
