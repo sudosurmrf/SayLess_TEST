@@ -19,7 +19,7 @@ app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST', 'OPTIONS', 'PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
   res.sendStatus(204);
-
+});
 app.use(cors({
   origin: function (origin, callback) {
     console.log('Request Origin:', origin);  // Log the incoming origin
@@ -36,7 +36,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
