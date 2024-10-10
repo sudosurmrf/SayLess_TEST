@@ -56,6 +56,7 @@ io.on('connection', (socket) =>{
   console.log('A user connected');
 
   socket.on("lobbysend", () =>{
+    console.log("Server is creating lobby")
     socket.emit("p1start");
     socket.broadcast.emit("p2wait");
   })

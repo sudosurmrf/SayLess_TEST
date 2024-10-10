@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { getRandomQuote, famousQuotes } from './Quotes.jsx';
 import io from 'socket.io-client';
 import axios from 'axios';
+require('dontenv').config();
 
-const apiURL = import.meta.env.VITE_API_URL;
-const socketPort = import.meta.env.SOCKET_PORT;
 
 // TODO need to adjust where this connects to later likely
 
@@ -28,9 +27,13 @@ const Game = () => {
   const [playerTwoInput, setPlayerTwoInput] = useState("");
   const [winOrLose, setWinOrLose] = useState("");
   const [socket, setSocket] = useState(null);
+  
+  const apiURL = import.meta.env.VITE_API_URL;
+  const socketPort = import.meta.env.SOCKET_PORT;
+
 
   useEffect(() => {
-    const newSocket = io.connect(`${apiURL}:${socketPort}`);
+    const newSocket = io.connect(`${import.meta.env.VITE_API_URL}:${import.meta.env.SOCKET_PORT}`);
     setSocket(newSocket);
     return () => {
       if (newSocket) {
@@ -70,6 +73,19 @@ const Game = () => {
 
   useEffect(()=>{
     if (!socket) return; //added this for when socket is null on first load since you guys are using useStates and not useRef
+
+
+    socket.on('connect', () => {
+      console.log('Socket connected:', socket.id);
+    });
+  
+    socket.on('disconnect', () => {
+      console.warn('Socket disconnected');
+    });
+  
+    socket.on('connect_error', (error) => {
+      console.error('Socket connection error:', error);
+    });
 
     socket.on("p1start", () => {
       setShowLobby(false);
@@ -163,10 +179,16 @@ const Game = () => {
     setMaxLengthVariable(countWordsExtreme(quote));
   }
 
-  const gameStart = () =>{
-    console.log("game start clicked");
-    socket.emit("lobbysend");
-  }
+  const gameStart = () => {
+    console.log("gameStart function called");
+    if (socket) {
+      console.log("Socket is defined, emitting 'lobbysend'");
+      socket.emit("lobbysend");
+    } else {
+      console.error("Socket is not defined");
+    }
+  };
+  
 
   const playerOneTurnOver = () => {
     socket.emit("p1send", { quote, playerOneInput });
