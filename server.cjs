@@ -7,12 +7,42 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+
+const allowedOrigins = ['http://localhost:3000', 'https://sayless.onrender.com', 'https://www.sayless.onrender.com', 'http://sayless.onrender.com', 'sayless:80','http://www.sayless.onrender.com'];
+
+app.options('*', (req, res) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST', 'OPTIONS', 'PATCH');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
+  res.setHeader(204);
+});
+
+app.use(cors({
+  origin: function (origin, callback) {
+    console.log('Request Origin:', origin);  // Log the incoming origin
+
+    if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps or curl)
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      console.error('Blocked Origin:', origin); // Log blocked origins
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/v1', require('./api/index.cjs'));
-
 
 const server = http.createServer(app);
 
