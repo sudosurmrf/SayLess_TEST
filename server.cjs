@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/v1', require('./api/index.cjs'));
-app.use()
+
 
 const server = http.createServer(app);
 
