@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react';
 import { getRandomQuote, famousQuotes } from './Quotes.jsx';
 import io from 'socket.io-client';
 import axios from 'axios';
+require('dontenv').config();
 
-const apiURL = import.meta.env.VITE_API_URL;
-const socketPort = import.meta.env.SOCKET_PORT;
 
 // TODO need to adjust where this connects to later likely
 
@@ -29,9 +28,13 @@ const Game = () => {
   const [playerTwoInput, setPlayerTwoInput] = useState("");
   const [winOrLose, setWinOrLose] = useState("");
   const [socket, setSocket] = useState(null);
+  
+  const apiURL = import.meta.env.VITE_API_URL;
+  const socketPort = import.meta.env.SOCKET_PORT;
+
 
   useEffect(() => {
-    const newSocket = io.connect(`${apiURL}:${socketPort}`);
+    const newSocket = io.connect(`${import.meta.env.VITE_API_URL}:${import.meta.env.SOCKET_PORT}`);
     setSocket(newSocket);
     return () => {
       if (newSocket) {
