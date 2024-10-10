@@ -92,9 +92,8 @@ app.get('*', (req, res, next) =>(
   res.sendFile(path.join(__dirname,'dist','index.html'))
 ));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => { console.log(`listening on port ${PORT}`)});
+const PORT = process.env.PORT || 443; // Use port 443 for HTTPS by default
 
-
-const SOCKET = process.env.SOCKET_PORT || 3001;
-server.listen(SOCKET, () => {console.log(`listening on ${SOCKET}`)});
+server.listen(PORT, () => {
+  console.log(`HTTPS server and Socket.io are listening on port ${PORT}`);
+});
