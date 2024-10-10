@@ -3,8 +3,11 @@ import { getRandomQuote, famousQuotes } from './Quotes.jsx';
 import io from 'socket.io-client';
 import axios from 'axios';
 
+const apiURL = import.meta.env.VITE_API_URL;
+const socketPort = import.meta.env.SOCKET_PORT;
+
 // TODO need to adjust where this connects to later likely
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect(`${apiURL}:${socketPort}`);
 
 const Game = () => {
   const [allQuotes, setAllQuotes] = useState([]);
