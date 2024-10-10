@@ -18,8 +18,7 @@ app.options('*', (req, res) => {
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST', 'OPTIONS', 'PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
-  res.setHeader(204);
-});
+  res.sendStatus(204);
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -49,7 +48,7 @@ const server = http.createServer(app);
 // TODO this origin needs to be changed to not be hard-coded
 const io = new Server(server, {
   cors: {
-    origin: "http://sayless.onrender.com", // this may be changed further, point being that this should be actual website url
+    origin: allowedOrigins, // this may be changed further, point being that this should be actual website url
     methods: ["GET", "POST"],
   },
 });
